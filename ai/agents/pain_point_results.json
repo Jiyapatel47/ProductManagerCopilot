@@ -1,0 +1,196 @@
+[
+  {
+    "cluster_id": 0,
+    "theme_name": "Billing and payment errors",
+    "pain_point": "Customers are charged even when their payment fails and see the wrong currency displayed on the billing page.",
+    "pain_point_type": "billing_issue",
+    "summary": "Incorrect billing behavior causes unexpected charges and regional currency mismatches.",
+    "supporting_feedback": [
+      "Payment failed but my card was still charged.",
+      "Billing page shows the wrong currency for my region."
+    ],
+    "feedback_count": 2,
+    "confidence": 0.95
+  },
+  {
+    "cluster_id": 1,
+    "theme_name": "Mobile UI clarity and navigation",
+    "pain_point": "The mobile app interface is perceived as cluttered with too many buttons, making navigation difficult.",
+    "pain_point_type": "usability_issue",
+    "summary": "Users struggle with navigating a crowded mobile UI despite recent redesign improvements.",
+    "supporting_feedback": [
+      "Great redesign, the new navigation is much clearer.",
+      "Mobile app UI feels cluttered compared to desktop.",
+      "The mobile layout is hard to navigate, too many buttons."
+    ],
+    "feedback_count": 3,
+    "confidence": 0.9
+  },
+  {
+    "cluster_id": 2,
+    "theme_name": "Positive support and onboarding experience",
+    "pain_point": "No clear pain point identified.",
+    "pain_point_type": "none",
+    "summary": "Feedback highlights fast support response and smooth onboarding, without indicating a problem.",
+    "supporting_feedback": [
+      "Really impressed with how fast support responded to my ticket.",
+      "The onboarding flow was smooth and easy to follow."
+    ],
+    "feedback_count": 2,
+    "confidence": 0.95
+  },
+  {
+    "cluster_id": 3,
+    "theme_name": "Login authentication reliability issues",
+    "pain_point": "Users experience frequent login timeouts, endless loading spinners, and authentication errors, especially during peak hours.",
+    "pain_point_type": "reliability_issue",
+    "summary": "Authentication system fails to reliably sign users in, causing access interruptions.",
+    "supporting_feedback": [
+      "Login page keeps timing out during peak hours.",
+      "I can't sign in most mornings, it just spins forever.",
+      "Authentication errors have been happening a lot lately."
+    ],
+    "feedback_count": 3,
+    "confidence": 0.96
+  },
+  {
+    "cluster_id": 4,
+    "theme_name": "Duplicate notifications and billing charges",
+    "pain_point": "Customers are being charged twice for the same subscription and receiving duplicate alerts, causing financial overcharges and notification clutter.",
+    "pain_point_type": "billing_issue",
+    "summary": "Evidence shows customers experience double billing and repeated notifications, indicating flaws in billing processing and notification deduplication.",
+    "supporting_feedback": [
+      "Got charged twice for the same subscription this month.",
+      "Notifications are duplicated, I get the same alert twice.",
+      "I keep getting the same notification multiple times a day."
+    ],
+    "feedback_count": 3,
+    "confidence": 0.96
+  },
+  {
+    "cluster_id": 5,
+    "theme_name": "Dashboard customization and dark mode",
+    "pain_point": "No clear pain point identified.",
+    "pain_point_type": "none",
+    "summary": "Feedback consists of feature requests for dark mode and widget customization rather than expressed problems.",
+    "supporting_feedback": [
+      "I would really like a dark theme for the dashboard.",
+      "Would like the option to customize dashboard widgets.",
+      "Please let us rearrange the dashboard cards."
+    ],
+    "feedback_count": 3,
+    "confidence": 0.94
+  },
+  {
+    "cluster_id": 6,
+    "theme_name": "Slack integration for notifications",
+    "pain_point": "No clear pain point identified.",
+    "pain_point_type": "none",
+    "summary": "Customers are requesting a Slack integration, which is a feature request, not a reported problem.",
+    "supporting_feedback": [
+      "Would love an integration with Slack for notifications.",
+      "Please add Slack notifications for new comments."
+    ],
+    "feedback_count": 2,
+    "confidence": 0.93
+  },
+  {
+    "cluster_id": 7,
+    "theme_name": "File upload stability problems",
+    "pain_point": "File uploads frequently crash, time out, or fail silently, preventing users from successfully uploading large files.",
+    "pain_point_type": "reliability_issue",
+    "summary": "Multiple users report crashes, timeouts, and silent failures during large file uploads, indicating reliability problems with the upload feature.",
+    "supporting_feedback": [
+      "The application crashes frequently when I upload a file.",
+      "The app crashes whenever I try to upload a large file.",
+      "App keeps crashing during file upload, very frustrating.",
+      "Uploading large files always times out.",
+      "File uploads fail silently with no error message."
+    ],
+    "feedback_count": 5,
+    "confidence": 0.97
+  },
+  {
+    "cluster_id": 8,
+    "theme_name": "Multi-language support",
+    "pain_point": "The application lacks support for languages other than English, preventing non‑English users from using it comfortably.",
+    "pain_point_type": "missing_capability",
+    "summary": "Customers request additional language options, specifically Spanish, indicating the current single‑language offering blocks their workflow.",
+    "supporting_feedback": [
+      "Please add multi-language support for non-English users.",
+      "A Spanish translation of the app would help our team a lot."
+    ],
+    "feedback_count": 2,
+    "confidence": 0.96
+  },
+  {
+    "cluster_id": 9,
+    "theme_name": "PDF export for reports",
+    "pain_point": "Users cannot export reports as PDF files, forcing them to perform manual formatting.",
+    "pain_point_type": "missing_capability",
+    "summary": "The lack of a PDF export option requires extra effort to format reports, which users see as a gap in functionality.",
+    "supporting_feedback": [
+      "Please add PDF export for reports.",
+      "We need an option to export reports as PDF.",
+      "Exporting to PDF would save us a lot of manual formatting."
+    ],
+    "feedback_count": 3,
+    "confidence": 0.96
+  },
+  {
+    "cluster_id": 10,
+    "theme_name": "Dark mode",
+    "pain_point": "The interface is only available in a bright theme, causing eye strain for users working in low‑light conditions.",
+    "pain_point_type": "missing_capability",
+    "summary": "Customers request a dark mode to reduce eye fatigue during night or low‑light work, indicating the current UI is uncomfortable.",
+    "supporting_feedback": [
+      "Please add dark mode to the application.",
+      "Please add dark mode. The bright interface hurts my eyes at night.",
+      "Dark mode would be great for late night work sessions.",
+      "The color contrast is hard to read on the settings page."
+    ],
+    "feedback_count": 4,
+    "confidence": 0.95
+  },
+  {
+    "cluster_id": 11,
+    "theme_name": "Search functionality usability",
+    "pain_point": "The search feature is hard to use because results are often irrelevant and the bar lacks filtering options.",
+    "pain_point_type": "usability_issue",
+    "summary": "Users experience difficulty locating needed items due to poor relevance and missing filters in the search interface.",
+    "supporting_feedback": [
+      "The search feature is difficult to use.",
+      "Search results are often irrelevant to what I typed.",
+      "The search bar doesn't support filters, makes it hard to find things."
+    ],
+    "feedback_count": 3,
+    "confidence": 0.95
+  },
+  {
+    "cluster_id": 12,
+    "theme_name": "Dashboard loading performance",
+    "pain_point": "Dashboard and analytics pages load slowly, and performance degrades over time, creating a sluggish user experience.",
+    "pain_point_type": "performance_issue",
+    "summary": "Multiple users report that the dashboard and analytics pages take too long to load, with the speed getting worse, leading to a sluggish experience.",
+    "supporting_feedback": [
+      "The dashboard is very slow when loading.",
+      "Pages take too long to load, especially the dashboard.",
+      "Dashboard loading speed has gotten worse this month.",
+      "Everything feels sluggish, especially on the analytics page."
+    ],
+    "feedback_count": 4,
+    "confidence": 0.98
+  },
+  {
+    "cluster_id": 13,
+    "theme_name": "Keyboard shortcuts for common actions",
+    "pain_point": "No clear pain point identified.",
+    "pain_point_type": "none",
+    "summary": "User requests keyboard shortcuts but does not describe a specific problem they are facing.",
+    "supporting_feedback": [
+      "Would be great to have keyboard shortcuts for common actions."
+    ],
+    "feedback_count": 1,
+    "confidence": 0.97
+  }
+]

@@ -1,0 +1,196 @@
+[
+    {
+        "cluster_id": 0,
+        "theme_name": "Billing and payment errors",
+        "theme_type": "problem",
+        "summary": "Customers encounter incorrect billing behavior, such as being charged despite a failed payment and seeing the wrong currency displayed for their region.",
+        "feedback_count": 2,
+        "supporting_feedback": [
+            "Payment failed but my card was still charged.",
+            "Billing page shows the wrong currency for my region."
+        ],
+        "outliers": [],
+        "confidence": 0.95
+    },
+    {
+        "cluster_id": 1,
+        "theme_name": "Mobile UI clarity and navigation",
+        "theme_type": "improvement_opportunity",
+        "summary": "Users find the mobile app interface cluttered and difficult to navigate, with too many buttons, while noting that the recent redesign improved navigation clarity overall.",
+        "feedback_count": 3,
+        "supporting_feedback": [
+            "Great redesign, the new navigation is much clearer.",
+            "Mobile app UI feels cluttered compared to desktop.",
+            "The mobile layout is hard to navigate, too many buttons."
+        ],
+        "outliers": [],
+        "confidence": 0.9
+    },
+    {
+        "cluster_id": 2,
+        "theme_name": "Positive support and onboarding experience",
+        "theme_type": "general_experience",
+        "summary": "Customers report a fast support response and a smooth, easy-to-follow onboarding flow, indicating a strong overall experience.",
+        "feedback_count": 2,
+        "supporting_feedback": [
+            "Really impressed with how fast support responded to my ticket.",
+            "The onboarding flow was smooth and easy to follow."
+        ],
+        "outliers": [],
+        "confidence": 0.95
+    },
+    {
+        "cluster_id": 3,
+        "theme_name": "Login authentication reliability issues",
+        "theme_type": "problem",
+        "summary": "Users experience frequent login timeouts, endless loading spinners, and authentication errors, especially during peak hours and mornings.",
+        "feedback_count": 3,
+        "supporting_feedback": [
+            "Login page keeps timing out during peak hours.",
+            "I can't sign in most mornings, it just spins forever.",
+            "Authentication errors have been happening a lot lately."
+        ],
+        "outliers": [],
+        "confidence": 0.96
+    },
+    {
+        "cluster_id": 4,
+        "theme_name": "Duplicate notifications and billing charges",
+        "theme_type": "problem",
+        "summary": "Customers experience duplicate alerts and are being charged twice for the same subscription, indicating issues with notification handling and billing duplication.",
+        "feedback_count": 3,
+        "supporting_feedback": [
+            "Got charged twice for the same subscription this month.",
+            "Notifications are duplicated, I get the same alert twice.",
+            "I keep getting the same notification multiple times a day."
+        ],
+        "outliers": [],
+        "confidence": 0.96
+    },
+    {
+        "cluster_id": 5,
+        "theme_name": "Dashboard customization and dark mode",
+        "theme_type": "feature_request",
+        "summary": "Customers request a dark theme and the ability to customize and rearrange dashboard widgets and cards.",
+        "feedback_count": 3,
+        "supporting_feedback": [
+            "I would really like a dark theme for the dashboard.",
+            "Would like the option to customize dashboard widgets.",
+            "Please let us rearrange the dashboard cards."
+        ],
+        "outliers": [],
+        "confidence": 0.94
+    },
+    {
+        "cluster_id": 6,
+        "theme_name": "Slack integration for notifications",
+        "theme_type": "feature_request",
+        "summary": "Customers want Slack notifications for new comments and other events, indicating a desire for Slack integration.",
+        "feedback_count": 2,
+        "supporting_feedback": [
+            "Would love an integration with Slack for notifications.",
+            "Please add Slack notifications for new comments."
+        ],
+        "outliers": [],
+        "confidence": 0.93
+    },
+    {
+        "cluster_id": 7,
+        "theme_name": "File upload stability problems",
+        "theme_type": "problem",
+        "summary": "Customers report frequent crashes, timeouts, and silent failures when uploading large files, indicating reliability issues with the file upload feature.",
+        "feedback_count": 5,
+        "supporting_feedback": [
+            "The application crashes frequently when I upload a file.",
+            "The app crashes whenever I try to upload a large file.",
+            "App keeps crashing during file upload, very frustrating.",
+            "Uploading large files always times out.",
+            "File uploads fail silently with no error message."
+        ],
+        "outliers": [],
+        "confidence": 0.97
+    },
+    {
+        "cluster_id": 8,
+        "theme_name": "Multi-language support",
+        "theme_type": "feature_request",
+        "summary": "Customers are asking for the application to support additional languages, specifically requesting a Spanish translation to accommodate non‑English users.",
+        "feedback_count": 2,
+        "supporting_feedback": [
+            "Please add multi-language support for non-English users.",
+            "A Spanish translation of the app would help our team a lot."
+        ],
+        "outliers": [],
+        "confidence": 0.96
+    },
+    {
+        "cluster_id": 9,
+        "theme_name": "PDF export for reports",
+        "theme_type": "feature_request",
+        "summary": "Users want the ability to export generated reports as PDF files, citing reduced manual formatting effort.",
+        "feedback_count": 3,
+        "supporting_feedback": [
+            "Please add PDF export for reports.",
+            "We need an option to export reports as PDF.",
+            "Exporting to PDF would save us a lot of manual formatting."
+        ],
+        "outliers": [],
+        "confidence": 0.96
+    },
+    {
+        "cluster_id": 10,
+        "theme_name": "Dark mode",
+        "theme_type": "feature_request",
+        "summary": "Customers request a dark mode option to reduce eye strain during night or low‑light work, noting that the current bright interface is hard to read.",
+        "feedback_count": 4,
+        "supporting_feedback": [
+            "Please add dark mode to the application.",
+            "Please add dark mode. The bright interface hurts my eyes at night.",
+            "Dark mode would be great for late night work sessions.",
+            "The color contrast is hard to read on the settings page."
+        ],
+        "outliers": [],
+        "confidence": 0.95
+    },
+    {
+        "cluster_id": 11,
+        "theme_name": "Search functionality usability",
+        "theme_type": "problem",
+        "summary": "Users find the search feature difficult to use because results are often irrelevant and the search bar lacks filtering capabilities.",
+        "feedback_count": 3,
+        "supporting_feedback": [
+            "The search feature is difficult to use.",
+            "Search results are often irrelevant to what I typed.",
+            "The search bar doesn't support filters, makes it hard to find things."
+        ],
+        "outliers": [],
+        "confidence": 0.95
+    },
+    {
+        "cluster_id": 12,
+        "theme_name": "Dashboard loading performance",
+        "theme_type": "problem",
+        "summary": "Users report that the dashboard and analytics pages load slowly, with performance degrading over time, causing a sluggish experience.",
+        "feedback_count": 4,
+        "supporting_feedback": [
+            "The dashboard is very slow when loading.",
+            "Pages take too long to load, especially the dashboard.",
+            "Dashboard loading speed has gotten worse this month.",
+            "Everything feels sluggish, especially on the analytics page."
+        ],
+        "outliers": [],
+        "confidence": 0.98
+    },
+    {
+        "cluster_id": 13,
+        "theme_name": "Keyboard shortcuts for common actions",
+        "theme_type": "feature_request",
+        "summary": "A user requests the addition of keyboard shortcuts to speed up frequent tasks.",
+        "feedback_count": 1,
+        "supporting_feedback": [
+            "Would be great to have keyboard shortcuts for common actions."
+        ],
+        "outliers": [],
+        "confidence": 0.97
+    }
+]

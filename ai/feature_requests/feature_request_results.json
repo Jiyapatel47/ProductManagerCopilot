@@ -1,0 +1,242 @@
+[
+    {
+        "feedback_id": "6aac416e440a016948a53faf",
+        "is_feature_request": false,
+        "feature_request": null,
+        "date": "2026-08-01"
+    },
+    {
+        "feedback_id": "6aac416e440a016948a53fb0",
+        "is_feature_request": false,
+        "feature_request": null,
+        "date": "2026-08-05"
+    },
+    {
+        "feedback_id": "6aac416e440a016948a53fb1",
+        "is_feature_request": false,
+        "feature_request": null,
+        "date": "2026-08-09"
+    },
+    {
+        "feedback_id": "6aac416e440a016948a53fb2",
+        "is_feature_request": true,
+        "feature_request": "Dark mode",
+        "date": "2026-08-10"
+    },
+    {
+        "feedback_id": "6aac416e440a016948a53fb3",
+        "is_feature_request": true,
+        "feature_request": "Dark theme for dashboard",
+        "date": "2026-08-15"
+    },
+    {
+        "feedback_id": "6aac416e440a016948a53fb4",
+        "is_feature_request": true,
+        "feature_request": "Dark mode",
+        "date": "2026-09-07"
+    },
+    {
+        "feedback_id": "6aac416e440a016948a53fb5",
+        "is_feature_request": true,
+        "feature_request": "Dark mode",
+        "date": "2026-09-10"
+    },
+    {
+        "feedback_id": "6aac416e440a016948a53fb6",
+        "is_feature_request": false,
+        "feature_request": null,
+        "date": "2026-08-20"
+    },
+    {
+        "feedback_id": "6aac416e440a016948a53fb7",
+        "is_feature_request": false,
+        "feature_request": null,
+        "date": "2026-08-22"
+    },
+    {
+        "feedback_id": "6aac416e440a016948a53fb8",
+        "is_feature_request": false,
+        "feature_request": null,
+        "date": "2026-09-15"
+    },
+    {
+        "feedback_id": "6aac416e440a016948a53fb9",
+        "is_feature_request": false,
+        "feature_request": null,
+        "date": "2026-09-18"
+    },
+    {
+        "feedback_id": "6aac416e440a016948a53fba",
+        "is_feature_request": true,
+        "feature_request": "PDF export for reports",
+        "date": "2026-09-01"
+    },
+    {
+        "feedback_id": "6aac416e440a016948a53fbb",
+        "is_feature_request": true,
+        "feature_request": "Export reports as PDF",
+        "date": "2026-09-05"
+    },
+    {
+        "feedback_id": "6aac416e440a016948a53fbc",
+        "is_feature_request": false,
+        "feature_request": null,
+        "date": "2026-09-20"
+    },
+    {
+        "feedback_id": "6aac416e440a016948a53fbd",
+        "is_feature_request": false,
+        "feature_request": null,
+        "date": "2026-09-08"
+    },
+    {
+        "feedback_id": "6aac416e440a016948a53fbe",
+        "is_feature_request": false,
+        "feature_request": null,
+        "date": "2026-09-12"
+    },
+    {
+        "feedback_id": "6aac416e440a016948a53fbf",
+        "is_feature_request": true,
+        "feature_request": "Add filter support to the search bar",
+        "date": "2026-09-22"
+    },
+    {
+        "feedback_id": "6aac416e440a016948a53fc0",
+        "is_feature_request": false,
+        "feature_request": null,
+        "date": "2026-08-12"
+    },
+    {
+        "feedback_id": "6aac416e440a016948a53fc1",
+        "is_feature_request": false,
+        "feature_request": null,
+        "date": "2026-08-14"
+    },
+    {
+        "feedback_id": "6aac416e440a016948a53fc2",
+        "is_feature_request": false,
+        "feature_request": null,
+        "date": "2026-09-25"
+    },
+    {
+        "feedback_id": "6aac416e440a016948a53fc3",
+        "is_feature_request": false,
+        "feature_request": null,
+        "date": "2026-08-18"
+    },
+    {
+        "feedback_id": "6aac416e440a016948a53fc4",
+        "is_feature_request": false,
+        "feature_request": null,
+        "date": "2026-09-02"
+    },
+    {
+        "feedback_id": "6aac416e440a016948a53fc5",
+        "is_feature_request": false,
+        "feature_request": null,
+        "date": "2026-09-14"
+    },
+    {
+        "feedback_id": "6aac416e440a016948a53fc6",
+        "is_feature_request": true,
+        "feature_request": "Integration with Slack for notifications",
+        "date": "2026-08-25"
+    },
+    {
+        "feedback_id": "6aac416e440a016948a53fc7",
+        "is_feature_request": true,
+        "feature_request": "Slack notifications for new comments",
+        "date": "2026-09-19"
+    },
+    {
+        "feedback_id": "6aac416e440a016948a53fc8",
+        "is_feature_request": false,
+        "feature_request": null,
+        "date": "2026-08-28"
+    },
+    {
+        "feedback_id": "6aac416e440a016948a53fc9",
+        "is_feature_request": false,
+        "feature_request": null,
+        "date": "2026-09-03"
+    },
+    {
+        "feedback_id": "6aac416e440a016948a53fca",
+        "is_feature_request": false,
+        "feature_request": null,
+        "date": "2026-09-11"
+    },
+    {
+        "feedback_id": "6aac416e440a016948a53fcb",
+        "is_feature_request": false,
+        "feature_request": null,
+        "date": "2026-08-30"
+    },
+    {
+        "feedback_id": "6aac416e440a016948a53fcc",
+        "is_feature_request": false,
+        "feature_request": null,
+        "date": "2026-09-16"
+    },
+    {
+        "feedback_id": "6aac416e440a016948a53fcd",
+        "is_feature_request": true,
+        "feature_request": "Option to customize dashboard widgets",
+        "date": "2026-09-06"
+    },
+    {
+        "feedback_id": "6aac416e440a016948a53fce",
+        "is_feature_request": true,
+        "feature_request": "Ability to rearrange dashboard cards",
+        "date": "2026-09-21"
+    },
+    {
+        "feedback_id": "6aac416e440a016948a53fcf",
+        "is_feature_request": false,
+        "feature_request": null,
+        "date": "2026-09-13"
+    },
+    {
+        "feedback_id": "6aac416e440a016948a53fd0",
+        "is_feature_request": false,
+        "feature_request": null,
+        "date": "2026-09-24"
+    },
+    {
+        "feedback_id": "6aac416e440a016948a53fd1",
+        "is_feature_request": false,
+        "feature_request": null,
+        "date": "2026-08-07"
+    },
+    {
+        "feedback_id": "6aac416e440a016948a53fd2",
+        "is_feature_request": false,
+        "feature_request": null,
+        "date": "2026-08-11"
+    },
+    {
+        "feedback_id": "6aac416e440a016948a53fd3",
+        "is_feature_request": true,
+        "feature_request": "Add multi-language support",
+        "date": "2026-09-04"
+    },
+    {
+        "feedback_id": "6aac416e440a016948a53fd4",
+        "is_feature_request": true,
+        "feature_request": "Provide Spanish translation of the app",
+        "date": "2026-09-17"
+    },
+    {
+        "feedback_id": "6aac416e440a016948a53fd5",
+        "is_feature_request": false,
+        "feature_request": null,
+        "date": "2026-09-09"
+    },
+    {
+        "feedback_id": "6aac416e440a016948a53fd6",
+        "is_feature_request": true,
+        "feature_request": "Keyboard shortcuts for common actions",
+        "date": "2026-09-23"
+    }
+]

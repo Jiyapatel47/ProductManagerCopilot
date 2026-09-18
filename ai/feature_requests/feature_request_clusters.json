@@ -1,0 +1,163 @@
+[
+    {
+        "cluster_id": 0,
+        "feature_name": "Multi-language support",
+        "summary": "Customers are requesting that the app support multiple languages, with a specific request for a Spanish translation.",
+        "request_count": 2,
+        "supporting_requests": [
+            "Add multi-language support",
+            "Provide Spanish translation of the app"
+        ],
+        "confidence": 0.99,
+        "request_dates": [
+            {
+                "feedback_id": "6aac416e440a016948a53fd3",
+                "date": "2026-09-04",
+                "feature_request": "Add multi-language support"
+            },
+            {
+                "feedback_id": "6aac416e440a016948a53fd4",
+                "date": "2026-09-17",
+                "feature_request": "Provide Spanish translation of the app"
+            }
+        ]
+    },
+    {
+        "cluster_id": 1,
+        "feature_name": "Dark Mode Theme",
+        "summary": "Customers are requesting a dark mode (dark theme) option for the application, including the dashboard, to allow the UI to be displayed with a darker color scheme.",
+        "request_count": 4,
+        "supporting_requests": [
+            "Dark mode",
+            "Dark theme for dashboard",
+            "Dark mode",
+            "Dark mode"
+        ],
+        "confidence": 0.98,
+        "request_dates": [
+            {
+                "feedback_id": "6aac416e440a016948a53fb2",
+                "date": "2026-08-10",
+                "feature_request": "Dark mode"
+            },
+            {
+                "feedback_id": "6aac416e440a016948a53fb3",
+                "date": "2026-08-15",
+                "feature_request": "Dark theme for dashboard"
+            },
+            {
+                "feedback_id": "6aac416e440a016948a53fb4",
+                "date": "2026-09-07",
+                "feature_request": "Dark mode"
+            },
+            {
+                "feedback_id": "6aac416e440a016948a53fb5",
+                "date": "2026-09-10",
+                "feature_request": "Dark mode"
+            }
+        ]
+    },
+    {
+        "cluster_id": 2,
+        "feature_name": "Customizable Dashboard Layout",
+        "summary": "Customers are requesting the ability to personalize their dashboard by customizing which widgets are displayed and rearranging the positions of dashboard cards.",
+        "request_count": 2,
+        "supporting_requests": [
+            "Option to customize dashboard widgets",
+            "Ability to rearrange dashboard cards"
+        ],
+        "confidence": 0.98,
+        "request_dates": [
+            {
+                "feedback_id": "6aac416e440a016948a53fcd",
+                "date": "2026-09-06",
+                "feature_request": "Option to customize dashboard widgets"
+            },
+            {
+                "feedback_id": "6aac416e440a016948a53fce",
+                "date": "2026-09-21",
+                "feature_request": "Ability to rearrange dashboard cards"
+            }
+        ]
+    },
+    {
+        "cluster_id": 3,
+        "feature_name": "PDF Export for Reports",
+        "summary": "Customers are requesting the ability to export generated reports in PDF format.",
+        "request_count": 2,
+        "supporting_requests": [
+            "PDF export for reports",
+            "Export reports as PDF"
+        ],
+        "confidence": 0.99,
+        "request_dates": [
+            {
+                "feedback_id": "6aac416e440a016948a53fba",
+                "date": "2026-09-01",
+                "feature_request": "PDF export for reports"
+            },
+            {
+                "feedback_id": "6aac416e440a016948a53fbb",
+                "date": "2026-09-05",
+                "feature_request": "Export reports as PDF"
+            }
+        ]
+    },
+    {
+        "cluster_id": 4,
+        "feature_name": "Slack Notification Integration",
+        "summary": "Customers are requesting the ability to receive platform notifications, including alerts for new comments, directly in Slack.",
+        "request_count": 2,
+        "supporting_requests": [
+            "Integration with Slack for notifications",
+            "Slack notifications for new comments"
+        ],
+        "confidence": 0.98,
+        "request_dates": [
+            {
+                "feedback_id": "6aac416e440a016948a53fc6",
+                "date": "2026-08-25",
+                "feature_request": "Integration with Slack for notifications"
+            },
+            {
+                "feedback_id": "6aac416e440a016948a53fc7",
+                "date": "2026-09-19",
+                "feature_request": "Slack notifications for new comments"
+            }
+        ]
+    },
+    {
+        "cluster_id": 5,
+        "feature_name": "Search Bar Filtering",
+        "summary": "Customers are requesting the ability to apply filters directly within the search bar to refine search results.",
+        "request_count": 1,
+        "supporting_requests": [
+            "Add filter support to the search bar"
+        ],
+        "confidence": 0.99,
+        "request_dates": [
+            {
+                "feedback_id": "6aac416e440a016948a53fbf",
+                "date": "2026-09-22",
+                "feature_request": "Add filter support to the search bar"
+            }
+        ]
+    },
+    {
+        "cluster_id": 6,
+        "feature_name": "Keyboard Shortcuts",
+        "summary": "Customers are requesting the ability to perform common actions using keyboard shortcuts, enabling faster and more efficient interaction with the product.",
+        "request_count": 1,
+        "supporting_requests": [
+            "Keyboard shortcuts for common actions"
+        ],
+        "confidence": 1.0,
+        "request_dates": [
+            {
+                "feedback_id": "6aac416e440a016948a53fd6",
+                "date": "2026-09-23",
+                "feature_request": "Keyboard shortcuts for common actions"
+            }
+        ]
+    }
+]
