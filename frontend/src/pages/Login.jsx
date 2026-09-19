@@ -30,21 +30,48 @@ function Login({ onCreateAccount, onLogin }) {
       const data = await response.json();
 
       if (!response.ok || !data.access_token) {
-        setMessage(data.detail || data.message || "Login failed");
+        setMessage(
+          data.detail ||
+            data.message ||
+            "Login failed"
+        );
+
         setLoading(false);
         return;
       }
 
-      localStorage.setItem("access_token", data.access_token);
+      // Save authentication token
+      localStorage.setItem(
+        "access_token",
+        data.access_token
+      );
+
+      // Save currently logged-in email
+      localStorage.setItem(
+        "logged_in_email",
+        email.trim().toLowerCase()
+      );
+
+      // If backend sends name, save it
+      if (data.name) {
+        localStorage.setItem(
+          "logged_in_name",
+          data.name
+        );
+      }
 
       setMessage("Login successful!");
 
       onLogin();
 
       console.log("Login response:", data);
+
     } catch (error) {
       console.error("Login error:", error);
-      setMessage("Could not connect to the backend");
+
+      setMessage(
+        "Could not connect to the backend"
+      );
     }
 
     setLoading(false);
@@ -64,7 +91,9 @@ function Login({ onCreateAccount, onLogin }) {
             </div>
 
             <div className="brand-main">
-              <span className="eyebrow">PRODUCT MANAGER COPILOT</span>
+              <span className="eyebrow">
+                PRODUCT MANAGER COPILOT
+              </span>
 
               <h1>
                 Turn customer
@@ -82,27 +111,36 @@ function Login({ onCreateAccount, onLogin }) {
             </div>
 
             <div className="feature-list">
+
               <div className="feature-item">
                 <span className="feature-icon">✓</span>
-                <span>Customer feedback intelligence</span>
+                <span>
+                  Customer feedback intelligence
+                </span>
               </div>
 
               <div className="feature-item">
                 <span className="feature-icon">✓</span>
-                <span>AI-powered feature prioritization</span>
+                <span>
+                  AI-powered feature prioritization
+                </span>
               </div>
 
               <div className="feature-item">
                 <span className="feature-icon">✓</span>
-                <span>PRD and user story generation</span>
+                <span>
+                  PRD and user story generation
+                </span>
               </div>
 
               <div className="feature-item">
                 <span className="feature-icon">✓</span>
-                <span>Roadmap planning and insights</span>
+                <span>
+                  Roadmap planning and insights
+                </span>
               </div>
+
             </div>
-
           </div>
 
           <div className="brand-footer">
@@ -122,35 +160,56 @@ function Login({ onCreateAccount, onLogin }) {
             </div>
 
             <div className="form-heading">
-              <span className="form-eyebrow">WELCOME BACK</span>
-              <h2>Sign in to your workspace</h2>
+              <span className="form-eyebrow">
+                WELCOME BACK
+              </span>
+
+              <h2>
+                Sign in to your workspace
+              </h2>
+
               <p>
                 Continue managing your product with AI.
               </p>
             </div>
 
-            <form onSubmit={handleLogin} className="auth-form">
+            <form
+              onSubmit={handleLogin}
+              className="auth-form"
+            >
 
+              {/* Email */}
               <div className="form-group">
-                <label htmlFor="email">Email address</label>
+                <label htmlFor="email">
+                  Email address
+                </label>
 
                 <div className="input-wrapper">
-                  <span className="input-icon">✉</span>
+                  <span className="input-icon">
+                    ✉
+                  </span>
 
                   <input
                     id="email"
                     type="email"
                     value={email}
-                    onChange={(event) => setEmail(event.target.value)}
+                    onChange={(event) =>
+                      setEmail(event.target.value)
+                    }
                     placeholder="you@example.com"
                     required
                   />
                 </div>
               </div>
 
+              {/* Password */}
               <div className="form-group">
+
                 <div className="label-row">
-                  <label htmlFor="password">Password</label>
+                  <label htmlFor="password">
+                    Password
+                  </label>
+
                   <button
                     type="button"
                     className="forgot-button"
@@ -160,28 +219,37 @@ function Login({ onCreateAccount, onLogin }) {
                 </div>
 
                 <div className="input-wrapper">
-                  <span className="input-icon">●</span>
+                  <span className="input-icon">
+                    ●
+                  </span>
 
                   <input
                     id="password"
                     type="password"
                     value={password}
-                    onChange={(event) => setPassword(event.target.value)}
+                    onChange={(event) =>
+                      setPassword(event.target.value)
+                    }
                     placeholder="Enter your password"
                     required
                   />
                 </div>
               </div>
 
+              {/* Login button */}
               <button
                 type="submit"
                 className="primary-button"
                 disabled={loading}
               >
-                {loading ? "Signing in..." : "Sign in"}
+                {loading
+                  ? "Signing in..."
+                  : "Sign in"}
+
                 {!loading && <span>→</span>}
               </button>
 
+              {/* Message */}
               {message && (
                 <div
                   className={`auth-message ${
@@ -197,7 +265,9 @@ function Login({ onCreateAccount, onLogin }) {
             </form>
 
             <div className="form-divider">
-              <span>NEW TO AI PRODUCT ASSISTANT?</span>
+              <span>
+                NEW TO AI PRODUCT ASSISTANT?
+              </span>
             </div>
 
             <button

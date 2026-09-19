@@ -13,33 +13,25 @@ import AIAssistant from "./pages/AIAssistant";
 import Roadmap from "./pages/Roadmap";
 import ProductStrategy from "./pages/ProductStrategy";
 import Reports from "./pages/Reports";
+import Settings from "./pages/Settings";
 
 function App() {
-  const [showRegister, setShowRegister] =
-    useState(false);
+  const [showRegister, setShowRegister] = useState(false);
 
-  const [currentPage, setCurrentPage] =
-    useState("dashboard");
+  const [currentPage, setCurrentPage] = useState("dashboard");
 
-  const [isLoggedIn, setIsLoggedIn] =
-    useState(
-      Boolean(
-        localStorage.getItem(
-          "access_token"
-        )
-      )
-    );
+  // Website open korlei first Login page
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   // =========================
   // LOGOUT
   // =========================
   const handleLogout = () => {
-    localStorage.removeItem(
-      "access_token"
-    );
+    localStorage.removeItem("access_token");
+    localStorage.removeItem("logged_in_name");
+    localStorage.removeItem("logged_in_email");
 
     setIsLoggedIn(false);
-
     setCurrentPage("dashboard");
     setShowRegister(false);
   };
@@ -61,9 +53,10 @@ function App() {
             onCreateAccount={() =>
               setShowRegister(true)
             }
-            onLogin={() =>
-              setIsLoggedIn(true)
-            }
+            onLogin={() => {
+              setIsLoggedIn(true);
+              setCurrentPage("dashboard");
+            }}
           />
         )}
       </>
@@ -73,10 +66,7 @@ function App() {
   // =========================
   // IMPORT FEEDBACK
   // =========================
-  if (
-    currentPage ===
-    "import-feedback"
-  ) {
+  if (currentPage === "import-feedback") {
     return (
       <ImportFeedback
         onBack={() =>
@@ -92,9 +82,7 @@ function App() {
   // =========================
   // INSIGHTS
   // =========================
-  if (
-    currentPage === "insights"
-  ) {
+  if (currentPage === "insights") {
     return (
       <Insights
         onBack={() =>
@@ -107,9 +95,7 @@ function App() {
   // =========================
   // PAIN POINTS
   // =========================
-  if (
-    currentPage === "pain-points"
-  ) {
+  if (currentPage === "pain-points") {
     return (
       <PainPoints
         onBack={() =>
@@ -122,10 +108,7 @@ function App() {
   // =========================
   // FEATURE REQUESTS
   // =========================
-  if (
-    currentPage ===
-    "feature-requests"
-  ) {
+  if (currentPage === "feature-requests") {
     return (
       <FeatureRequests
         onBack={() =>
@@ -138,10 +121,7 @@ function App() {
   // =========================
   // PRIORITIZATION
   // =========================
-  if (
-    currentPage ===
-    "prioritization"
-  ) {
+  if (currentPage === "prioritization") {
     return (
       <Prioritization
         onBack={() =>
@@ -154,10 +134,7 @@ function App() {
   // =========================
   // PRD GENERATOR
   // =========================
-  if (
-    currentPage ===
-    "prd-generator"
-  ) {
+  if (currentPage === "prd-generator") {
     return (
       <PRDGenerator
         onBack={() =>
@@ -166,21 +143,24 @@ function App() {
       />
     );
   }
+
+  // =========================
+  // REPORTS
+  // =========================
   if (currentPage === "reports") {
-  return (
-    <Reports
-      onBack={() => setCurrentPage("dashboard")}
-    />
-  );
-}
+    return (
+      <Reports
+        onBack={() =>
+          setCurrentPage("dashboard")
+        }
+      />
+    );
+  }
 
   // =========================
   // AI ASSISTANT
   // =========================
-  if (
-    currentPage ===
-    "ai-assistant"
-  ) {
+  if (currentPage === "ai-assistant") {
     return (
       <AIAssistant
         onBack={() =>
@@ -193,9 +173,7 @@ function App() {
   // =========================
   // ROADMAP
   // =========================
-  if (
-    currentPage === "roadmap"
-  ) {
+  if (currentPage === "roadmap") {
     return (
       <Roadmap
         onBack={() =>
@@ -204,65 +182,81 @@ function App() {
       />
     );
   }
-if (currentPage === "product-strategy") {
-  return (
-    <ProductStrategy
-      onBack={() => setCurrentPage("dashboard")}
-    />
-  );
-}
+
+  // =========================
+  // PRODUCT STRATEGY
+  // =========================
+  if (currentPage === "product-strategy") {
+    return (
+      <ProductStrategy
+        onBack={() =>
+          setCurrentPage("dashboard")
+        }
+      />
+    );
+  }
+
+  // =========================
+  // SETTINGS
+  // =========================
+  if (currentPage === "settings") {
+    return (
+      <Settings
+        onBack={() =>
+          setCurrentPage("dashboard")
+        }
+        onLogout={handleLogout}
+      />
+    );
+  }
+
   // =========================
   // DASHBOARD
   // =========================
   return (
     <Dashboard
       onImportFeedback={() =>
-        setCurrentPage(
-          "import-feedback"
-        )
+        setCurrentPage("import-feedback")
       }
 
       onInsights={() =>
-        setCurrentPage(
-          "insights"
-        )
+        setCurrentPage("insights")
       }
 
       onPainPoints={() =>
-        setCurrentPage(
-          "pain-points"
-        )
+        setCurrentPage("pain-points")
       }
 
       onFeatureRequests={() =>
-        setCurrentPage(
-          "feature-requests"
-        )
+        setCurrentPage("feature-requests")
       }
 
       onPrioritization={() =>
-        setCurrentPage(
-          "prioritization"
-        )
+        setCurrentPage("prioritization")
       }
 
       onPRDGenerator={() =>
-        setCurrentPage(
-          "prd-generator"
-        )
+        setCurrentPage("prd-generator")
       }
 
       onRoadmap={() =>
-        setCurrentPage(
-          "roadmap"
-        )
+        setCurrentPage("roadmap")
       }
-      onProductStrategy={() => setCurrentPage("product-strategy")}
-onReports={() => setCurrentPage("reports")}
+
+      onProductStrategy={() =>
+        setCurrentPage("product-strategy")
+      }
+
+      onReports={() =>
+        setCurrentPage("reports")
+      }
+
       onAIAssistant={() =>
-        setCurrentPage(
-          "ai-assistant"
-        )
+        setCurrentPage("ai-assistant")
+      }
+
+      onSettings={() =>
+        setCurrentPage("settings")
       }
 
       onLogout={handleLogout}

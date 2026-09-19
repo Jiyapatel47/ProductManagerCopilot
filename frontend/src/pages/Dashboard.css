@@ -1015,4 +1015,54 @@
   }
 
 }
+/* =========================================
+   SETTINGS + LOGOUT SIDEBAR BUTTONS
+========================================= */
+
+.settings-nav-button {
+  color: #9ca3bd;
+}
+
+.settings-nav-button span {
+  color: #737a9c;
+}
+
+.settings-nav-button:hover {
+  color: #ffffff;
+  background: linear-gradient(
+    90deg,
+    rgba(99, 102, 241, 0.22),
+    rgba(139, 92, 246, 0.08)
+  );
+  transform: translateX(4px);
+  box-shadow: inset 3px 0 0 #7c70ff;
+}
+
+.settings-nav-button:hover span {
+  color: #a78bfa;
+  text-shadow: 0 0 10px rgba(167, 139, 250, 0.7);
+}
+
+/* Logout */
+.sidebar-bottom .logout-button {
+  color: #ff7b91;
+}
+
+.sidebar-bottom .logout-button span {
+  color: #ff7b91;
+}
+
+.sidebar-bottom .logout-button:hover {
+  color: #ff9aae;
+  background: linear-gradient(
+    90deg,
+    rgba(244, 63, 94, 0.18),
+    rgba(244, 63, 94, 0.06)
+  );
+  box-shadow: inset 3px 0 0 #fb7185;
+}
+
+.sidebar-bottom .logout-button:hover span {
+  color: #ff9aae;
+}
 

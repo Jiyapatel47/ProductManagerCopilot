@@ -1,17 +1,22 @@
 import { useState } from "react";
 
-function Register({ onBackToLogin }) {
+function Register({ onLogin }) {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [message, setMessage] = useState("");
   const [loading, setLoading] = useState(false);
 
-  const handleRegister = async (event) => {
-    event.preventDefault();
+  const handleRegister = async (e) => {
+    e.preventDefault();
+    setMessage("");
+
+    if (!name.trim() || !email.trim() || !password.trim()) {
+      setMessage("Please fill in all fields.");
+      return;
+    }
 
     setLoading(true);
-    setMessage("");
 
     try {
       const response = await fetch(
@@ -31,9 +36,6 @@ function Register({ onBackToLogin }) {
 
       const data = await response.json();
 
-      console.log("Register status:", response.status);
-      console.log("Register response:", data);
-
       if (!response.ok) {
         let errorMessage = "Registration failed";
 
@@ -51,244 +53,85 @@ function Register({ onBackToLogin }) {
         return;
       }
 
+      localStorage.setItem(
+        "registered_name",
+        name.trim()
+      );
+
+      localStorage.setItem(
+        "registered_email",
+        email.trim().toLowerCase()
+      );
+
       setMessage(
         "Registration successful! You can now sign in."
       );
 
-      // Clear form after successful registration
       setName("");
       setEmail("");
       setPassword("");
-
-      console.log("Registration successful:", data);
-
     } catch (error) {
       console.error("Registration error:", error);
-
       setMessage(
-        "Could not connect to the backend. Please check if the server is running."
+        "Unable to connect to the server. Please try again."
       );
     } finally {
-      // Loading will always stop
       setLoading(false);
     }
   };
 
   return (
-    <div className="auth-page">
-      <div className="auth-container">
+    <div className="register-page">
+      <div className="register-container">
+        <h1>Create Account</h1>
+        <p>Register to continue to Product Manager Copilot.</p>
 
-        {/* Left branding section */}
-        <section className="auth-brand">
-          <div className="brand-content">
-
-            <div className="brand-logo">
-              <div className="logo-mark">✦</div>
-              <span>AI Product Assistant</span>
-            </div>
-
-            <div className="brand-main">
-              <span className="eyebrow">
-                BUILD WITH INSIGHT
-              </span>
-
-              <h1>
-                From feedback
-                <br />
-                to your next
-                <br />
-                <span>great feature.</span>
-              </h1>
-
-              <p>
-                Bring your customer feedback into one
-                intelligent workspace and let AI help you
-                turn it into action.
-              </p>
-            </div>
-
-            <div className="feature-list">
-
-              <div className="feature-item">
-                <span className="feature-icon">✓</span>
-                <span>Understand customer pain points</span>
-              </div>
-
-              <div className="feature-item">
-                <span className="feature-icon">✓</span>
-                <span>Discover recurring product themes</span>
-              </div>
-
-              <div className="feature-item">
-                <span className="feature-icon">✓</span>
-                <span>Prioritize what matters most</span>
-              </div>
-
-              <div className="feature-item">
-                <span className="feature-icon">✓</span>
-                <span>Generate product documentation</span>
-              </div>
-
-            </div>
+        <form onSubmit={handleRegister}>
+          <div>
+            <label>Full Name</label>
+            <input
+              type="text"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+              placeholder="Enter your full name"
+            />
           </div>
 
-          <div className="brand-footer">
-            AI Product Assistant · Product Intelligence Workspace
+          <div>
+            <label>Email</label>
+            <input
+              type="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              placeholder="Enter your email"
+            />
           </div>
-        </section>
 
-        {/* Register section */}
-        <section className="auth-form-section">
-          <div className="auth-form-wrapper">
-
-            <div className="mobile-brand">
-              <div className="brand-logo">
-                <div className="logo-mark">✦</div>
-                <span>AI Product Assistant</span>
-              </div>
-            </div>
-
-            <div className="form-heading">
-              <span className="form-eyebrow">
-                GET STARTED
-              </span>
-
-              <h2>Create your workspace account</h2>
-
-              <p>
-                Start turning customer feedback into product
-                decisions.
-              </p>
-            </div>
-
-            <form
-              onSubmit={handleRegister}
-              className="auth-form"
-            >
-
-              {/* Name */}
-              <div className="form-group">
-                <label htmlFor="name">
-                  Full name
-                </label>
-
-                <div className="input-wrapper">
-                  <span className="input-icon">♙</span>
-
-                  <input
-                    id="name"
-                    type="text"
-                    value={name}
-                    onChange={(event) =>
-                      setName(event.target.value)
-                    }
-                    placeholder="Enter your name"
-                    required
-                    disabled={loading}
-                  />
-                </div>
-              </div>
-
-              {/* Email */}
-              <div className="form-group">
-                <label htmlFor="register-email">
-                  Email address
-                </label>
-
-                <div className="input-wrapper">
-                  <span className="input-icon">✉</span>
-
-                  <input
-                    id="register-email"
-                    type="email"
-                    value={email}
-                    onChange={(event) =>
-                      setEmail(event.target.value)
-                    }
-                    placeholder="you@example.com"
-                    required
-                    disabled={loading}
-                  />
-                </div>
-              </div>
-
-              {/* Password */}
-              <div className="form-group">
-                <label htmlFor="register-password">
-                  Password
-                </label>
-
-                <div className="input-wrapper">
-                  <span className="input-icon">●</span>
-
-                  <input
-                    id="register-password"
-                    type="password"
-                    value={password}
-                    onChange={(event) =>
-                      setPassword(event.target.value)
-                    }
-                    placeholder="Create a password"
-                    minLength={6}
-                    required
-                    disabled={loading}
-                  />
-                </div>
-
-                <span className="input-hint">
-                  Use at least 6 characters for your password.
-                </span>
-              </div>
-
-              {/* Register button */}
-              <button
-                type="submit"
-                className="primary-button"
-                disabled={loading}
-              >
-                {loading
-                  ? "Creating account..."
-                  : "Create account"}
-
-                {!loading && <span>→</span>}
-              </button>
-
-              {/* Message */}
-              {message && (
-                <div
-                  className={`auth-message ${
-                    message.toLowerCase().includes("successful")
-                      ? "success"
-                      : "error"
-                  }`}
-                >
-                  {message}
-                </div>
-              )}
-
-            </form>
-
-            {/* Back to login */}
-            <div className="form-divider">
-              <span>ALREADY HAVE AN ACCOUNT?</span>
-            </div>
-
-            <button
-              type="button"
-              className="secondary-button"
-              onClick={onBackToLogin}
-              disabled={loading}
-            >
-              Back to sign in
-            </button>
-
-            <p className="security-note">
-              🔒 Your workspace data is securely protected.
-            </p>
-
+          <div>
+            <label>Password</label>
+            <input
+              type="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              placeholder="Enter your password"
+            />
           </div>
-        </section>
 
+          {message && (
+            <p className="register-message">{message}</p>
+          )}
+
+          <button type="submit" disabled={loading}>
+            {loading ? "Creating Account..." : "Create Account"}
+          </button>
+        </form>
+
+        <p>
+          Already have an account?{" "}
+          <button type="button" onClick={onLogin}>
+            Sign In
+          </button>
+        </p>
       </div>
     </div>
   );

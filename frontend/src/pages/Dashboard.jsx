@@ -12,6 +12,7 @@ function Dashboard({
    onReports,
   onAIAssistant,
   onRoadmap,
+  onSettings,
   onLogout,
 }) {
   const [stats, setStats] = useState({
@@ -397,44 +398,47 @@ function Dashboard({
 
         <div className="sidebar-bottom">
 
-          <button className="nav-item">
-            <span>⚙</span>
-            Settings
-          </button>
+  <button
+    className="nav-item settings-nav-button"
+    onClick={onSettings}
+  >
+    <span>⚙</span>
+    Settings
+  </button>
 
-          <button
-            className="nav-item logout-button"
-            onClick={onLogout}
-          >
-            <span>↪</span>
-            Logout
-          </button>
+  <button
+    className="nav-item logout-button"
+    onClick={onLogout}
+  >
+    <span>↪</span>
+    Logout
+  </button>
 
-          <div className="user-card">
+  <div className="user-card">
 
-            <div className="user-avatar">
-              U
-            </div>
+    <div className="user-avatar">
+      U
+    </div>
 
-            <div className="user-info">
+    <div className="user-info">
 
-              <strong>
-                Product Manager
-              </strong>
+      <strong>
+        Product Manager
+      </strong>
 
-              <small>
-                Workspace owner
-              </small>
+      <small>
+        Workspace owner
+      </small>
 
-            </div>
+    </div>
 
-            <span>
-              ⋮
-            </span>
+    <span>
+      ⋮
+    </span>
 
-          </div>
+  </div>
 
-        </div>
+</div>
 
       </aside>
 
