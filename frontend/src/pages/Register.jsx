@@ -22,30 +22,56 @@ function Register({ onBackToLogin }) {
             "Content-Type": "application/json",
           },
           body: JSON.stringify({
-            name,
-            email,
-            password,
+            name: name.trim(),
+            email: email.trim().toLowerCase(),
+            password: password,
           }),
         }
       );
 
       const data = await response.json();
 
+      console.log("Register status:", response.status);
+      console.log("Register response:", data);
+
       if (!response.ok) {
-        setMessage(data.detail || data.message || "Registration failed");
-        setLoading(false);
+        let errorMessage = "Registration failed";
+
+        if (typeof data.detail === "string") {
+          errorMessage = data.detail;
+        } else if (Array.isArray(data.detail)) {
+          errorMessage = data.detail
+            .map((error) => error.msg)
+            .join(", ");
+        } else if (data.message) {
+          errorMessage = data.message;
+        }
+
+        setMessage(errorMessage);
         return;
       }
 
-      setMessage("Registration successful!");
+      setMessage(
+        "Registration successful! You can now sign in."
+      );
 
-      console.log("Registration response:", data);
+      // Clear form after successful registration
+      setName("");
+      setEmail("");
+      setPassword("");
+
+      console.log("Registration successful:", data);
+
     } catch (error) {
       console.error("Registration error:", error);
-      setMessage("Could not connect to the backend");
-    }
 
-    setLoading(false);
+      setMessage(
+        "Could not connect to the backend. Please check if the server is running."
+      );
+    } finally {
+      // Loading will always stop
+      setLoading(false);
+    }
   };
 
   return (
@@ -62,7 +88,9 @@ function Register({ onBackToLogin }) {
             </div>
 
             <div className="brand-main">
-              <span className="eyebrow">BUILD WITH INSIGHT</span>
+              <span className="eyebrow">
+                BUILD WITH INSIGHT
+              </span>
 
               <h1>
                 From feedback
@@ -73,12 +101,14 @@ function Register({ onBackToLogin }) {
               </h1>
 
               <p>
-                Bring your customer feedback into one intelligent
-                workspace and let AI help you turn it into action.
+                Bring your customer feedback into one
+                intelligent workspace and let AI help you
+                turn it into action.
               </p>
             </div>
 
             <div className="feature-list">
+
               <div className="feature-item">
                 <span className="feature-icon">✓</span>
                 <span>Understand customer pain points</span>
@@ -98,8 +128,8 @@ function Register({ onBackToLogin }) {
                 <span className="feature-icon">✓</span>
                 <span>Generate product documentation</span>
               </div>
-            </div>
 
+            </div>
           </div>
 
           <div className="brand-footer">
@@ -119,7 +149,9 @@ function Register({ onBackToLogin }) {
             </div>
 
             <div className="form-heading">
-              <span className="form-eyebrow">GET STARTED</span>
+              <span className="form-eyebrow">
+                GET STARTED
+              </span>
 
               <h2>Create your workspace account</h2>
 
@@ -134,8 +166,11 @@ function Register({ onBackToLogin }) {
               className="auth-form"
             >
 
+              {/* Name */}
               <div className="form-group">
-                <label htmlFor="name">Full name</label>
+                <label htmlFor="name">
+                  Full name
+                </label>
 
                 <div className="input-wrapper">
                   <span className="input-icon">♙</span>
@@ -144,13 +179,17 @@ function Register({ onBackToLogin }) {
                     id="name"
                     type="text"
                     value={name}
-                    onChange={(event) => setName(event.target.value)}
+                    onChange={(event) =>
+                      setName(event.target.value)
+                    }
                     placeholder="Enter your name"
                     required
+                    disabled={loading}
                   />
                 </div>
               </div>
 
+              {/* Email */}
               <div className="form-group">
                 <label htmlFor="register-email">
                   Email address
@@ -163,13 +202,17 @@ function Register({ onBackToLogin }) {
                     id="register-email"
                     type="email"
                     value={email}
-                    onChange={(event) => setEmail(event.target.value)}
+                    onChange={(event) =>
+                      setEmail(event.target.value)
+                    }
                     placeholder="you@example.com"
                     required
+                    disabled={loading}
                   />
                 </div>
               </div>
 
+              {/* Password */}
               <div className="form-group">
                 <label htmlFor="register-password">
                   Password
@@ -182,30 +225,39 @@ function Register({ onBackToLogin }) {
                     id="register-password"
                     type="password"
                     value={password}
-                    onChange={(event) => setPassword(event.target.value)}
+                    onChange={(event) =>
+                      setPassword(event.target.value)
+                    }
                     placeholder="Create a password"
+                    minLength={6}
                     required
+                    disabled={loading}
                   />
                 </div>
 
                 <span className="input-hint">
-                  Use a strong password for your account.
+                  Use at least 6 characters for your password.
                 </span>
               </div>
 
+              {/* Register button */}
               <button
                 type="submit"
                 className="primary-button"
                 disabled={loading}
               >
-                {loading ? "Creating account..." : "Create account"}
+                {loading
+                  ? "Creating account..."
+                  : "Create account"}
+
                 {!loading && <span>→</span>}
               </button>
 
+              {/* Message */}
               {message && (
                 <div
                   className={`auth-message ${
-                    message.includes("successful")
+                    message.toLowerCase().includes("successful")
                       ? "success"
                       : "error"
                   }`}
@@ -216,6 +268,7 @@ function Register({ onBackToLogin }) {
 
             </form>
 
+            {/* Back to login */}
             <div className="form-divider">
               <span>ALREADY HAVE AN ACCOUNT?</span>
             </div>
@@ -224,6 +277,7 @@ function Register({ onBackToLogin }) {
               type="button"
               className="secondary-button"
               onClick={onBackToLogin}
+              disabled={loading}
             >
               Back to sign in
             </button>

@@ -1,10 +1,11 @@
-from fastapi import APIRouter
+from fastapi import APIRouter, HTTPException, status
 
-from backend.app.database.mongodb import db
-from backend.app.models.user import create_user_document
-from backend.app.schemas.user import UserCreate, UserLogin
-from backend.app.services.auth_service import hash_password, verify_password
-from backend.app.services.jwt_service import create_access_token
+from app.database.mongodb import db
+from app.models.user import create_user_document
+from app.models.workspace import create_workspace_document
+from app.schemas.user import UserCreate, UserLogin
+from app.services.auth_service import hash_password, verify_password
+from app.services.jwt_service import create_access_token
 
 
 router = APIRouter(
@@ -20,9 +21,10 @@ def register(user: UserCreate):
     )
 
     if existing_user:
-        return {
-            "message": "User already exists"
-        }
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail="User already exists",
+        )
 
     password_hash = hash_password(user.password)
 
@@ -33,10 +35,18 @@ def register(user: UserCreate):
     )
 
     result = db.users.insert_one(user_document)
+    user_id = str(result.inserted_id)
+
+    # Automatically create a default workspace for the new user
+    workspace_document = create_workspace_document(
+        name="My Product Workspace",
+        owner_id=user_id,
+    )
+    db.workspaces.insert_one(workspace_document)
 
     return {
         "message": "User registered successfully",
-        "user_id": str(result.inserted_id),
+        "user_id": user_id,
     }
 
 
@@ -47,9 +57,10 @@ def login(user: UserLogin):
     )
 
     if not existing_user:
-        return {
-            "message": "Invalid email or password"
-        }
+        raise HTTPException(
+            status_code=status.HTTP_401_UNAUTHORIZED,
+            detail="Invalid email or password",
+        )
 
     password_valid = verify_password(
         user.password,
@@ -57,9 +68,10 @@ def login(user: UserLogin):
     )
 
     if not password_valid:
-        return {
-            "message": "Invalid email or password"
-        }
+        raise HTTPException(
+            status_code=status.HTTP_401_UNAUTHORIZED,
+            detail="Invalid email or password",
+        )
 
     access_token = create_access_token(
         str(existing_user["_id"])

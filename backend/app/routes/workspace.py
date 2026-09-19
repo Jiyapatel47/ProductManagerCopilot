@@ -1,9 +1,9 @@
 from fastapi import APIRouter, Depends
 
-from backend.app.database.mongodb import db
-from backend.app.middleware.auth import get_current_user_id
-from backend.app.models.workspace import create_workspace_document
-from backend.app.schemas.workspace import WorkspaceCreate
+from app.database.mongodb import db
+from app.middleware.auth import get_current_user_id
+from app.models.workspace import create_workspace_document
+from app.schemas.workspace import WorkspaceCreate
 
 
 router = APIRouter(

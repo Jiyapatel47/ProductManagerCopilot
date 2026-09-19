@@ -1,7 +1,7 @@
 from fastapi import APIRouter, Depends, HTTPException
 
-from backend.app.database.mongodb import db
-from backend.app.middleware.auth import get_current_user_id
+from app.database.mongodb import db
+from app.middleware.auth import get_current_user_id
 
 router = APIRouter(
     prefix="/api/features",

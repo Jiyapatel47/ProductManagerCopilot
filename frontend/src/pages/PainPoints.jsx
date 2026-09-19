@@ -7,416 +7,328 @@ function PainPoints({ onBack }) {
   const [error, setError] = useState("");
 
   const fetchPainPoints = async () => {
-    setLoading(true);
-    setError("");
-
     try {
+      setLoading(true);
+      setError("");
+
       const token = localStorage.getItem("access_token");
+
+      if (!token) {
+        throw new Error("You are not logged in.");
+      }
 
       const response = await fetch(
         "http://127.0.0.1:8000/api/insights/pain-points",
         {
           method: "GET",
           headers: {
-            Authorization: `Bearer ${token}`,
+            Authorization: "Bearer " + token,
           },
         }
       );
 
-      const data = await response.json();
+      const rawResponse = await response.text();
 
-      if (!response.ok) {
-        setError(
-          data.detail ||
-            "Could not load customer pain points."
-        );
+      console.log("Pain Points status:", response.status);
+      console.log("Pain Points response:", rawResponse);
 
-        setLoading(false);
-        return;
+      let data = {};
+
+      try {
+        data = JSON.parse(rawResponse);
+      } catch {
+        data = {
+          detail: rawResponse || "Invalid server response",
+        };
       }
 
-      setPainPoints(data.pain_points || []);
+      if (!response.ok) {
+        throw new Error(
+          data.detail || "Failed to load pain points."
+        );
+      }
+
+      setPainPoints(
+        Array.isArray(data.pain_points)
+          ? data.pain_points
+          : []
+      );
     } catch (err) {
-      console.error("Pain points error:", err);
+      console.error("Pain Points error:", err);
 
       setError(
-        "Could not connect to the backend."
+        err.message || "Could not connect to the backend."
       );
+    } finally {
+      setLoading(false);
     }
-
-    setLoading(false);
   };
 
   useEffect(() => {
     fetchPainPoints();
   }, []);
 
-  const formatPainPointType = (type) => {
-    if (!type || type === "none") {
-      return "No pain point";
-    }
+  const totalPainPoints = painPoints.length;
 
-    return type
-      .replaceAll("_", " ")
-      .replace(/\b\w/g, (letter) =>
-        letter.toUpperCase()
-      );
-  };
+  const averageConfidence =
+    painPoints.length > 0
+      ? painPoints.reduce(
+          (sum, item) =>
+            sum + Number(item.confidence || 0),
+          0
+        ) / painPoints.length
+      : 0;
 
-  const isActualPainPoint = (item) => {
-    return (
-      item.pain_point_type &&
-      item.pain_point_type !== "none"
-    );
-  };
-
-  const actualPainPoints = painPoints.filter(
-    isActualPainPoint
+  const totalFeedback = painPoints.reduce(
+    (sum, item) =>
+      sum + Number(item.feedback_count || 0),
+    0
   );
+
+  if (loading) {
+    return (
+      <div className="pain-points-page">
+        <div className="pain-points-container">
+          <button className="back-button" onClick={onBack}>
+            ← Back
+          </button>
+
+          <div className="loading-state">
+            Loading AI pain points...
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className="pain-points-page">
+        <div className="pain-points-container">
+          <button className="back-button" onClick={onBack}>
+            ← Back
+          </button>
+
+          <div className="error-message">
+            {error}
+          </div>
+
+          <button
+            className="retry-button"
+            onClick={fetchPainPoints}
+          >
+            Try Again
+          </button>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="pain-points-page">
+      <div className="pain-points-container">
 
-      {/* Header */}
-      <header className="pain-points-header">
+        <button className="back-button" onClick={onBack}>
+          ← Back
+        </button>
 
-        <div className="pain-points-header-left">
+        <div className="pain-points-header">
+          <div>
+            <h1>Customer Pain Points</h1>
+
+            <p>
+              AI-identified problems and customer difficulties
+              from your feedback.
+            </p>
+          </div>
 
           <button
-            className="pain-points-back-button"
-            onClick={onBack}
+            className="refresh-button"
+            onClick={fetchPainPoints}
           >
-            ←
+            ↻ Refresh
           </button>
+        </div>
 
-          <div>
+        <div className="summary-grid">
 
-            <p className="pain-points-eyebrow">
-              PRODUCT INTELLIGENCE
-            </p>
+          <div className="summary-card">
+            <div className="summary-icon">⚠️</div>
 
-            <h1>
-              Customer Pain Points
-            </h1>
+            <div>
+              <h3>Total Pain Points</h3>
 
-            <p className="pain-points-description">
-              AI-identified problems and difficulties
-              experienced by your customers.
-            </p>
+              <div className="summary-value">
+                {totalPainPoints}
+              </div>
+            </div>
+          </div>
 
+          <div className="summary-card">
+            <div className="summary-icon">💬</div>
+
+            <div>
+              <h3>Related Feedback</h3>
+
+              <div className="summary-value">
+                {totalFeedback}
+              </div>
+            </div>
+          </div>
+
+          <div className="summary-card">
+            <div className="summary-icon">🤖</div>
+
+            <div>
+              <h3>AI Confidence</h3>
+
+              <div className="summary-value">
+                {(averageConfidence * 100).toFixed(0)}%
+              </div>
+            </div>
           </div>
 
         </div>
 
-        <button
-          className="pain-points-refresh-button"
-          onClick={fetchPainPoints}
-          disabled={loading}
-        >
-          ↻
-          {loading
-            ? " Refreshing..."
-            : " Refresh"}
-        </button>
+        <div className="pain-points-card">
 
-      </header>
-
-
-      <main className="pain-points-content">
-
-        {/* Summary */}
-        <section className="pain-points-summary">
-
-          <div className="pain-summary-card">
-
-            <div className="pain-summary-icon">
-              !
-            </div>
-
+          <div className="section-header">
             <div>
-              <span>
-                Identified pain points
-              </span>
+              <h2>Identified Pain Points</h2>
 
-              <strong>
-                {loading
-                  ? "..."
-                  : actualPainPoints.length}
-              </strong>
+              <p>
+                Problems detected from customer feedback
+              </p>
             </div>
 
+            <span className="count-badge">
+              {totalPainPoints} Issues
+            </span>
           </div>
 
+          {painPoints.length === 0 ? (
+            <div className="empty-state">
+              <div className="empty-icon">🔍</div>
 
-          <div className="pain-summary-card">
+              <h3>No pain points found</h3>
 
-            <div className="pain-summary-icon">
-              ◈
+              <p>
+                Import customer feedback to generate
+                AI-powered pain points.
+              </p>
             </div>
+          ) : (
+            <div className="pain-points-list">
 
-            <div>
-              <span>
-                Themes analyzed
-              </span>
+              {painPoints.map((item, index) => (
+                <div
+                  className="pain-point-item"
+                  key={item._id || index}
+                >
 
-              <strong>
-                {loading
-                  ? "..."
-                  : painPoints.length}
-              </strong>
-            </div>
+                  <div className="pain-point-number">
+                    {index + 1}
+                  </div>
 
-          </div>
+                  <div className="pain-point-content">
 
+                    <div className="pain-point-title-row">
 
-          <div className="pain-summary-card">
+                      <h3>
+                        {item.pain_point ||
+                          "Unnamed Pain Point"}
+                      </h3>
 
-            <div className="pain-summary-icon">
-              ◎
-            </div>
-
-            <div>
-              <span>
-                Supporting feedback
-              </span>
-
-              <strong>
-                {loading
-                  ? "..."
-                  : actualPainPoints.reduce(
-                      (total, item) =>
-                        total +
-                        item.feedback_count,
-                      0
-                    )}
-              </strong>
-            </div>
-
-          </div>
-
-        </section>
-
-
-        {/* Loading */}
-        {loading && (
-          <div className="pain-points-state">
-
-            <div className="pain-loading-spinner"></div>
-
-            <h3>
-              Analyzing customer problems
-            </h3>
-
-            <p>
-              Loading AI-identified pain points...
-            </p>
-
-          </div>
-        )}
-
-
-        {/* Error */}
-        {!loading && error && (
-          <div className="pain-points-state pain-error-state">
-
-            <div className="pain-state-icon">
-              !
-            </div>
-
-            <h3>
-              Unable to load pain points
-            </h3>
-
-            <p>
-              {error}
-            </p>
-
-            <button
-              onClick={fetchPainPoints}
-            >
-              Try again
-            </button>
-
-          </div>
-        )}
-
-
-        {/* Content */}
-        {!loading && !error && (
-          <section className="pain-points-section">
-
-            <div className="pain-section-top">
-
-              <div>
-
-                <p className="pain-section-eyebrow">
-                  CUSTOMER PROBLEMS
-                </p>
-
-                <h2>
-                  Identified pain points
-                </h2>
-
-                <p>
-                  Problems are derived from themes and
-                  their supporting customer feedback.
-                </p>
-
-              </div>
-
-              <span className="pain-count">
-                {actualPainPoints.length} identified
-              </span>
-
-            </div>
-
-
-            {actualPainPoints.length === 0 ? (
-
-              <div className="pain-points-state">
-
-                <div className="pain-state-icon">
-                  ✓
-                </div>
-
-                <h3>
-                  No customer pain points identified
-                </h3>
-
-                <p>
-                  The analyzed feedback does not currently
-                  contain clear customer problems.
-                </p>
-
-              </div>
-
-            ) : (
-
-              <div className="pain-points-grid">
-
-                {actualPainPoints.map((item) => (
-
-                  <article
-                    className="pain-point-card"
-                    key={item.id}
-                  >
-
-                    <div className="pain-point-card-top">
-
-                      <div className="pain-point-icon">
-                        !
-                      </div>
-
-                      <span className="pain-point-type">
-                        {formatPainPointType(
-                          item.pain_point_type
-                        )}
-                      </span>
-
-                      <span className="pain-cluster-label">
-                        Cluster {item.cluster_id}
+                      <span className="confidence-badge">
+                        {(
+                          Number(item.confidence || 0) *
+                          100
+                        ).toFixed(0)}
+                        %
                       </span>
 
                     </div>
 
+                    <div className="pain-point-tags">
 
-                    <h3>
-                      {item.pain_point}
-                    </h3>
+                      <span className="type-badge">
+                        {item.pain_point_type ||
+                          "General"}
+                      </span>
 
+                      <span className="theme-badge">
+                        Theme:{" "}
+                        {item.theme_name ||
+                          "General"}
+                      </span>
+
+                    </div>
 
                     <p className="pain-point-summary">
-                      {item.summary}
+                      {item.summary ||
+                        "No summary available."}
                     </p>
-
 
                     <div className="pain-point-meta">
 
-                      <div>
+                      <span>
+                        💬 Feedback:{" "}
+                        {Number(
+                          item.feedback_count || 0
+                        )}
+                      </span>
 
-                        <strong>
-                          {item.feedback_count}
-                        </strong>
-
-                        <span>
-                          supporting feedback
-                        </span>
-
-                      </div>
-
-
-                      <div>
-
-                        <strong>
-                          {Math.round(
-                            item.confidence * 100
-                          )}
-                          %
-                        </strong>
-
-                        <span>
-                          confidence
-                        </span>
-
-                      </div>
+                      <span>
+                        🔗 Cluster:{" "}
+                        {item.cluster_id ?? "-"}
+                      </span>
 
                     </div>
 
+                    {Array.isArray(
+                      item.supporting_feedback
+                    ) &&
+                      item.supporting_feedback.length >
+                        0 && (
+                        <div className="supporting-feedback">
 
-                    <div className="pain-confidence-bar">
+                          <h4>
+                            Supporting Feedback
+                          </h4>
 
-                      <div
-                        className="pain-confidence-fill"
-                        style={{
-                          width: `${
-                            item.confidence * 100
-                          }%`,
-                        }}
-                      ></div>
-
-                    </div>
-
-
-                    {item.supporting_feedback?.length >
-                      0 && (
-
-                      <div className="pain-evidence">
-
-                        <span className="pain-evidence-label">
-                          CUSTOMER EVIDENCE
-                        </span>
-
-                        <div className="pain-evidence-list">
-
-                          {item.supporting_feedback.map(
-                            (feedback, index) => (
-
-                              <p key={index}>
-                                “{feedback}”
-                              </p>
-
-                            )
-                          )}
+                          <ul>
+                            {item.supporting_feedback
+                              .slice(0, 3)
+                              .map(
+                                (
+                                  feedback,
+                                  feedbackIndex
+                                ) => (
+                                  <li
+                                    key={
+                                      feedbackIndex
+                                    }
+                                  >
+                                    {feedback}
+                                  </li>
+                                )
+                              )}
+                          </ul>
 
                         </div>
+                      )}
 
-                      </div>
+                  </div>
 
-                    )}
+                </div>
+              ))}
 
-                  </article>
+            </div>
+          )}
 
-                ))}
+        </div>
 
-              </div>
-
-            )}
-
-          </section>
-        )}
-
-      </main>
-
+      </div>
     </div>
   );
 }

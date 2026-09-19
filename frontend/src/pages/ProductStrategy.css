@@ -1,0 +1,266 @@
+.strategy-page {
+  min-height: 100vh;
+  padding: 40px;
+  background: #0c1023;
+  color: #1f2937;
+}
+
+.strategy-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 24px;
+  margin-bottom: 30px;
+}
+
+.strategy-label {
+  margin: 0 0 8px;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  color: #6b6ef3;
+}
+
+.strategy-header h1 {
+  margin: 0;
+  font-size: 32px;
+  font-weight: 700;
+  color:white;
+}
+
+.strategy-subtitle {
+  margin-top: 10px;
+  color: #e7e9ee;
+  font-size: 15px;
+}
+
+.strategy-back-btn {
+  border: 1px solid #e5e7eb;
+  background: white;
+  color: #374151;
+  padding: 11px 18px;
+  border-radius: 9px;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.strategy-back-btn:hover {
+  background: #f3f4f6;
+}
+
+.strategy-action-row {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 20px;
+}
+
+.generate-strategy-btn {
+  border: none;
+  background: #4f46e5;
+  color: white;
+  padding: 12px 20px;
+  border-radius: 9px;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.generate-strategy-btn:hover {
+  background: #4338ca;
+}
+
+.generate-strategy-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.strategy-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 20px;
+}
+
+.strategy-card {
+  background: white;
+  border: 1px solid #e5e7eb;
+  border-radius: 14px;
+  padding: 24px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);
+}
+
+.full-width {
+  grid-column: 1 / -1;
+}
+
+.card-title-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 18px;
+}
+
+.card-title-row h2 {
+  margin: 0;
+  font-size: 18px;
+}
+
+.card-icon {
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
+  background: #eef2ff;
+  color: #4f46e5;
+  font-weight: 700;
+}
+
+.strategy-text {
+  margin: 0;
+  color: #4b5563;
+  line-height: 1.7;
+  font-size: 14px;
+}
+
+.strategy-list {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+
+.strategy-list li {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 13px;
+  color: #4b5563;
+  line-height: 1.5;
+  font-size: 14px;
+}
+
+.problem-list li span {
+  color: #ef4444;
+  font-weight: 700;
+}
+
+.opportunity-list li span {
+  color: #4f46e5;
+}
+
+.priority-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.priority-item {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 15px;
+  border: 1px solid #e5e7eb;
+  border-radius: 10px;
+  background: #fafafa;
+}
+
+.priority-number {
+  min-width: 30px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: #eef2ff;
+  color: #4f46e5;
+  font-weight: 700;
+}
+
+.priority-item p {
+  margin: 0;
+  font-size: 14px;
+  color: #374151;
+}
+
+.next-steps {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.next-step {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 13px 15px;
+  border-radius: 9px;
+  background: #f9fafb;
+  color: #4b5563;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.step-check {
+  color: #16a34a;
+  font-weight: 700;
+}
+
+.strategy-loading {
+  min-height: 80vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  color: #6b7280;
+}
+
+.strategy-error {
+  margin-bottom: 20px;
+  padding: 13px 16px;
+  border-radius: 9px;
+  background: #fef2f2;
+  color: #b91c1c;
+  border: 1px solid #fecaca;
+}
+
+.strategy-empty {
+  max-width: 600px;
+  margin: 100px auto;
+  padding: 50px;
+  text-align: center;
+  background: white;
+  border: 1px solid #e5e7eb;
+  border-radius: 16px;
+}
+
+.empty-icon {
+  font-size: 40px;
+  color: #4f46e5;
+  margin-bottom: 15px;
+}
+
+.strategy-empty h2 {
+  margin: 0 0 10px;
+}
+
+.strategy-empty p {
+  color: #6b7280;
+  line-height: 1.6;
+  margin-bottom: 25px;
+}
+
+@media (max-width: 800px) {
+  .strategy-page {
+    padding: 20px;
+  }
+
+  .strategy-header {
+    flex-direction: column;
+  }
+
+  .strategy-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .full-width {
+    grid-column: auto;
+  }
+}

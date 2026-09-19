@@ -3,9 +3,10 @@ import io
 
 from fastapi import APIRouter, Depends, File, Form, HTTPException, UploadFile
 
-from backend.app.database.mongodb import db
-from backend.app.middleware.auth import get_current_user_id
-from backend.app.models.feedback import create_feedback_document
+from app.database.mongodb import db
+from app.middleware.auth import get_current_user_id
+from app.models.feedback import create_feedback_document
+from app.services.analysis_service import analyze_workspace_feedback
 
 
 router = APIRouter(
@@ -20,11 +21,19 @@ async def ingest_feedback(
     source_type: str = Form(...),
     user_id: str = Depends(get_current_user_id),
 ):
+    # -----------------------------------------------------
+    # Validate file
+    # -----------------------------------------------------
+
     if not file.filename.lower().endswith(".csv"):
         raise HTTPException(
             status_code=400,
             detail="Only CSV files are supported",
         )
+
+    # -----------------------------------------------------
+    # Find user's workspace
+    # -----------------------------------------------------
 
     workspace = db.workspaces.find_one(
         {"owner_id": user_id}
@@ -36,6 +45,12 @@ async def ingest_feedback(
             detail="No workspace found for this user",
         )
 
+    workspace_id = str(workspace["_id"])
+
+    # -----------------------------------------------------
+    # Read CSV
+    # -----------------------------------------------------
+
     file_content = await file.read()
 
     try:
@@ -46,13 +61,19 @@ async def ingest_feedback(
             detail="CSV file must use UTF-8 encoding",
         )
 
-    reader = csv.DictReader(io.StringIO(decoded_content))
+    reader = csv.DictReader(
+        io.StringIO(decoded_content)
+    )
 
     if not reader.fieldnames:
         raise HTTPException(
             status_code=400,
             detail="CSV file does not contain headers",
         )
+
+    # -----------------------------------------------------
+    # Normalize headers
+    # -----------------------------------------------------
 
     normalized_headers = {
         header.strip().lower(): header
@@ -68,16 +89,23 @@ async def ingest_feedback(
             detail="CSV must contain a 'content' column",
         )
 
+    source_header = normalized_headers.get("source")
+    date_header = normalized_headers.get("date")
+
+    # -----------------------------------------------------
+    # Create feedback documents
+    # -----------------------------------------------------
+
     feedback_documents = []
 
     for row in reader:
-        content = (row.get(content_header) or "").strip()
+
+        content = (
+            row.get(content_header) or ""
+        ).strip()
 
         if not content:
             continue
-
-        source_header = normalized_headers.get("source")
-        date_header = normalized_headers.get("date")
 
         source = (
             (row.get(source_header) or "").strip()
@@ -92,7 +120,7 @@ async def ingest_feedback(
         )
 
         document = create_feedback_document(
-            workspace_id=str(workspace["_id"]),
+            workspace_id=workspace_id,
             content=content,
             source=source or source_type,
             feedback_date=feedback_date,
@@ -104,18 +132,54 @@ async def ingest_feedback(
 
         feedback_documents.append(document)
 
+    # -----------------------------------------------------
+    # Validate records
+    # -----------------------------------------------------
+
     if not feedback_documents:
         raise HTTPException(
             status_code=400,
             detail="No valid feedback records found in the CSV",
         )
 
-    result = db.feedback.insert_many(feedback_documents)
+    # -----------------------------------------------------
+    # Insert feedback
+    # -----------------------------------------------------
+
+    result = db.feedback.insert_many(
+        feedback_documents
+    )
+
+    # -----------------------------------------------------
+    # Run AI analysis
+    # -----------------------------------------------------
+
+    try:
+
+        analysis_result = analyze_workspace_feedback(
+            workspace_id
+        )
+
+    except Exception as exc:
+
+        return {
+            "message": "Feedback imported, but AI analysis failed",
+            "filename": file.filename,
+            "source_type": source_type,
+            "records_imported": len(result.inserted_ids),
+            "workspace_id": workspace_id,
+            "analysis_error": str(exc),
+        }
+
+    # -----------------------------------------------------
+    # Final response
+    # -----------------------------------------------------
 
     return {
-        "message": "Feedback imported successfully",
+        "message": "Feedback imported and analyzed successfully",
         "filename": file.filename,
         "source_type": source_type,
         "records_imported": len(result.inserted_ids),
-        "workspace_id": str(workspace["_id"]),
+        "workspace_id": workspace_id,
+        "analysis": analysis_result,
     }

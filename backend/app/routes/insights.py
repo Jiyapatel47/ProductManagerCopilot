@@ -1,13 +1,10 @@
 from fastapi import APIRouter, Depends, HTTPException
 
-from backend.app.database.mongodb import db
-from backend.app.middleware.auth import get_current_user_id
+from app.database.mongodb import db
+from app.middleware.auth import get_current_user_id
 
-from ai.trends.trend_analyzer import (
+from app.services.trend_service import (
     calculate_feedback_trends,
-)
-
-from ai.trends.feature_request_trend_analyzer import (
     calculate_feature_request_trends,
 )
 

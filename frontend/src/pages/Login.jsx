@@ -29,7 +29,7 @@ function Login({ onCreateAccount, onLogin }) {
 
       const data = await response.json();
 
-      if (!response.ok) {
+      if (!response.ok || !data.access_token) {
         setMessage(data.detail || data.message || "Login failed");
         setLoading(false);
         return;
