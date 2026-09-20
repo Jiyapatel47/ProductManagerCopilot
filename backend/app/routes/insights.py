@@ -113,6 +113,71 @@ def get_pain_points(
     }
 
 
+@router.get("/features")
+def get_feature_requests(
+    user_id: str = Depends(get_current_user_id),
+):
+    workspace = db.workspaces.find_one(
+        {"owner_id": user_id}
+    )
+
+    if not workspace:
+        raise HTTPException(
+            status_code=404,
+            detail="No workspace found for this user",
+        )
+
+    workspace_id = str(workspace["_id"])
+
+    features = list(
+        db.feature_requests.find(
+            {"workspace_id": workspace_id}
+        ).sort("cluster_id", 1)
+    )
+
+    response = []
+
+    for feature in features:
+        response.append(
+            {
+                "_id": str(feature["_id"]),
+                "cluster_id": feature.get(
+                    "cluster_id",
+                    0,
+                ),
+                "feature_name": feature.get(
+                    "feature_name",
+                    "Unnamed Feature",
+                ),
+                "summary": feature.get(
+                    "summary",
+                    "",
+                ),
+                "request_count": feature.get(
+                    "request_count",
+                    0,
+                ),
+                "supporting_requests": feature.get(
+                    "supporting_requests",
+                    [],
+                ),
+                "confidence": feature.get(
+                    "confidence",
+                    0,
+                ),
+                "request_dates": feature.get(
+                    "request_dates",
+                    [],
+                ),
+            }
+        )
+
+    return {
+        "features": response,
+        "total": len(response),
+    }
+
+
 @router.get("/trends")
 def get_feedback_trends(
     user_id: str = Depends(get_current_user_id),

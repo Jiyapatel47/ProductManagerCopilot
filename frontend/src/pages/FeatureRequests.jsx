@@ -18,7 +18,7 @@ function FeatureRequests({ onBack }) {
       }
 
       const response = await fetch(
-        "http://127.0.0.1:8000/api/features",
+        "http://127.0.0.1:8000/api/insights/features",
         {
           method: "GET",
           headers: {

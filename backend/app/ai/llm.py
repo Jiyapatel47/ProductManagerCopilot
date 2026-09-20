@@ -37,6 +37,19 @@ def generate_ai_response(prompt: str) -> str:
             },
         ],
         temperature=0.2,
+        max_completion_tokens=8192,
+        include_reasoning=False,
     )
 
-    return response.choices[0].message.content.strip()
+    result = response.choices[0].message.content
+
+    if result is None:
+        result = ""
+
+    result = result.strip()
+
+    print("\n========== AI RESPONSE ==========")
+    print(result)
+    print("========== END AI RESPONSE ==========\n")
+
+    return result

@@ -8,11 +8,37 @@ def generate_workspace_prd(workspace_id: str) -> dict:
     in a workspace.
     """
 
+    print("\n========== PRD DEBUG ==========")
+    print("Workspace ID received:", workspace_id)
+
+    # Check all feature requests
+    all_features = list(db.feature_requests.find({}))
+
+    print("Total feature requests in DB:", len(all_features))
+
+    # Print workspace IDs stored in feature requests
+    stored_workspace_ids = set(
+        str(feature.get("workspace_id"))
+        for feature in all_features
+        if feature.get("workspace_id") is not None
+    )
+
+    print("Workspace IDs in feature_requests:")
+    print(stored_workspace_ids)
+
+    # Find features for current workspace
     features = list(
         db.feature_requests.find(
             {"workspace_id": workspace_id}
         )
     )
+
+    print(
+        "Features found for current workspace:",
+        len(features)
+    )
+
+    print("========== END PRD DEBUG ==========\n")
 
     if not features:
         return {
@@ -20,7 +46,7 @@ def generate_workspace_prd(workspace_id: str) -> dict:
             "prd": None,
         }
 
-    # Select the feature with the highest request count.
+    # Select feature with highest request count.
     # If request counts are equal, use AI confidence.
     features.sort(
         key=lambda feature: (
@@ -31,6 +57,11 @@ def generate_workspace_prd(workspace_id: str) -> dict:
     )
 
     selected_feature = features[0]
+
+    print(
+        "Selected feature:",
+        selected_feature.get("feature_name")
+    )
 
     prd = generate_prd(selected_feature)
 

@@ -1,3 +1,4 @@
+
 from app.database.mongodb import db
 
 from app.ai.theme_agent import extract_themes
@@ -55,9 +56,20 @@ def analyze_workspace_feedback(workspace_id: str) -> dict:
 
     themes = extract_themes(feedback_list)
 
+    print("\n========== ANALYSIS DEBUG ==========")
+    print("Workspace ID:", workspace_id)
+    print("Feedback count:", len(feedback_list))
+    print("Themes extracted:", len(themes))
+
     pain_points = extract_pain_points(feedback_list)
 
+    print("Pain points extracted:", len(pain_points))
+
     feature_requests = extract_feature_requests(feedback_list)
+
+    print("Feature requests extracted:", len(feature_requests))
+    print("Feature request data:", feature_requests)
+    print("========== END ANALYSIS DEBUG ==========\n")
 
     # -----------------------------------------------------
     # Remove previous analysis for this workspace
@@ -85,7 +97,9 @@ def analyze_workspace_feedback(workspace_id: str) -> dict:
 
         document = create_theme_document(
             workspace_id=workspace_id,
-            cluster_id=int(theme.get("cluster_id", 0)),
+            cluster_id=int(
+                theme.get("cluster_id", 0)
+            ),
             theme_name=theme.get(
                 "theme_name",
                 "Unknown Theme",
@@ -204,6 +218,13 @@ def analyze_workspace_feedback(workspace_id: str) -> dict:
 
         feature_requests_created += 1
 
+    print("\n========== DATABASE SAVE DEBUG ==========")
+    print("Themes created:", themes_created)
+    print("Pain points created:", pain_points_created)
+    print("Feature requests created:", feature_requests_created)
+    print("Workspace ID used for saving:", workspace_id)
+    print("========== END DATABASE SAVE DEBUG ==========\n")
+
     return {
         "message": "Feedback analysis completed successfully",
         "feedback_analyzed": len(feedback_list),
@@ -211,3 +232,4 @@ def analyze_workspace_feedback(workspace_id: str) -> dict:
         "pain_points_created": pain_points_created,
         "feature_requests_created": feature_requests_created,
     }
+

@@ -89,14 +89,14 @@
 .summary-card h3 {
   margin: 0 0 6px;
   font-size: 14px;
-  color: #6b7280;
+  color: #e3e7ef;
   font-weight: 600;
 }
 
 .summary-value {
   font-size: 28px;
   font-weight: 750;
-  color: #242126;
+  color: #f0ebf3;
 }
 
 .features-card {

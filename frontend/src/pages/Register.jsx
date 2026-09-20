@@ -1,6 +1,7 @@
+import "./Register.css";
 import { useState } from "react";
 
-function Register({ onLogin }) {
+function Register({onBackToLogin}) {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -128,7 +129,7 @@ function Register({ onLogin }) {
 
         <p>
           Already have an account?{" "}
-          <button type="button" onClick={onLogin}>
+          <button type="button" onClick={onBackToLogin}>
             Sign In
           </button>
         </p>
