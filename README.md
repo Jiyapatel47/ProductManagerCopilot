@@ -151,37 +151,26 @@ Open the local URL printed by Vite in your terminal.
 - Add sensitive configuration files to `.gitignore`.
 - Use environment variables for application secrets.
 
-## 👩‍💻 My Contribution
+## 🤖 My Contribution
 
-**Role: Backend Development & API Integration**
+**Role: AI Team Member | AI Integration & Agent Development**
 
-- Worked on backend API development and integration.
-- Contributed to feedback ingestion and product insight workflows.
-- Worked with FastAPI and MongoDB.
-- Integrated AI-powered functionality using Groq and CrewAI.
-- Supported API integration between the backend and frontend.
-
+- Contributed to AI-powered customer feedback analysis and insight generation.
+- Worked on AI agent workflows using CrewAI.
+- Integrated Groq LLM capabilities for processing customer feedback and generating insights.
+- Contributed to identifying customer themes, pain points, and feature requests using AI.
+- Worked on AI-assisted Product Requirements Document (PRD) and product roadmap generation.
+- Supported the integration of AI capabilities into the product management workflow.
 
 
 ## 🎯 Project Objective
 
 To simplify product management by converting unstructured customer feedback into structured insights, actionable requirements, and AI-assisted product planning.
 
-## 🔮 Future Enhancements
-
-- Advanced feedback analytics and visualizations
-- Improved feature prioritization models
-- More customizable roadmap generation
-- Enhanced AI recommendations
-- Production deployment and monitoring
 
 ## 🤝 Collaboration
 
 This project was developed collaboratively. Contributions, feedback, and suggestions are welcome.
-
-## 📄 License
-
-Add an appropriate license if the project owner has chosen to distribute the project under one.
 
 ---
 
