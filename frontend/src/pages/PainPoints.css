@@ -1,6 +1,6 @@
 .pain-points-page {
   min-height: 100vh;
-  background: #4b516a;
+  background: #041451;
   padding: 40px 20px;
 }
 
@@ -34,12 +34,12 @@
 .pain-points-header h1 {
   margin: 0 0 8px;
   font-size: 34px;
-  color: #f3f5f9;
+  color: #e1e5eb;
 }
 
 .pain-points-header p {
   margin: 0;
-  color: #bfc1c6;
+  color: #e2e6ef;
   font-size: 20px;
 }
 
@@ -124,7 +124,7 @@
 
 .section-header p {
   margin: 0;
-  color: #7a7d87;
+  color: #071543;
   font-size: 14px;
 }
 
@@ -224,7 +224,7 @@
 
 .pain-point-summary {
   margin: 10px 0;
-  color: #5f626c;
+  color: #0d1941;
   line-height: 1.6;
   font-size: 14px;
 }
@@ -232,7 +232,7 @@
 .pain-point-meta {
   display: flex;
   gap: 20px;
-  color: #777b85;
+  color: #091a46;
   font-size: 13px;
   margin-top: 12px;
 }
@@ -257,7 +257,7 @@
 
 .supporting-feedback li {
   margin-bottom: 7px;
-  color: #686b74;
+  color: #06174b;
   font-size: 13px;
   line-height: 1.5;
 }

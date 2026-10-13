@@ -39,7 +39,7 @@
 
 .feature-header p {
   margin: 0;
-  color: #6b7280;
+  color: #051b46;
   font-size: 16px;
 }
 
@@ -123,7 +123,7 @@
 
 .section-header p {
   margin: 0;
-  color: #7a7d87;
+  color: #07174d;
   font-size: 14px;
 }
 
@@ -198,7 +198,7 @@
 
 .feature-summary {
   margin: 12px 0;
-  color: #5f626c;
+  color: #091847;
   line-height: 1.6;
   font-size: 14px;
 }
@@ -206,7 +206,7 @@
 .feature-meta {
   display: flex;
   gap: 20px;
-  color: #777b85;
+  color: #061f5f;
   font-size: 13px;
   margin-top: 12px;
 }
@@ -231,7 +231,7 @@
 
 .supporting-requests li {
   margin-bottom: 7px;
-  color: #686b74;
+  color: #081b52;
   font-size: 13px;
   line-height: 1.5;
 }

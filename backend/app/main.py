@@ -1,8 +1,10 @@
+
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
-from app.routes.auth import router as auth_router
 from app.database.mongodb import test_mongodb_connection
+
+from app.routes.auth import router as auth_router
 from app.routes.workspace import router as workspace_router
 from app.routes.ingestion import router as ingestion_router
 from app.routes.insights import router as insights_router
@@ -14,6 +16,9 @@ from app.routes.roadmap import router as roadmap_router
 from app.routes.reports import router as reports_router
 from app.routes.strategy import router as strategy_router
 from app.routes.analysis import router as analysis_router
+from app.routes.user_stories import router as user_stories_router
+
+
 app = FastAPI(
     title="AI Product Assistant",
     description="AI-Driven Product Manager Copilot",
@@ -23,16 +28,14 @@ app = FastAPI(
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=[
-        "http://localhost:5173",
-        "http://127.0.0.1:5173",
-    ],
-    allow_credentials=True,
+    allow_origins=["*"],
+    allow_credentials=False,
     allow_methods=["*"],
     allow_headers=["*"],
 )
 
 
+# Existing API routers
 app.include_router(auth_router)
 app.include_router(workspace_router)
 app.include_router(ingestion_router)
@@ -42,11 +45,12 @@ app.include_router(prioritization_router)
 app.include_router(prd_router)
 app.include_router(assistant_router)
 app.include_router(roadmap_router)
-app.include_router(
-    reports_router
-)
+app.include_router(reports_router)
 app.include_router(strategy_router)
 app.include_router(analysis_router)
+app.include_router(user_stories_router)
+
+
 @app.get("/")
 def root():
     return {
