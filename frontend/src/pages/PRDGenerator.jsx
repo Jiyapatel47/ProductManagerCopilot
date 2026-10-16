@@ -28,7 +28,7 @@ function PRDGenerator({ onBack }) {
       console.log("Calling PRD API...");
 
       const response = await fetch(
-        "http://127.0.0.1:8000/api/prd/generate",
+        "https://productmanagercopilot.onrender.com/api/prd/generate",
         {
           method: "POST",
           headers: {

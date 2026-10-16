@@ -53,7 +53,7 @@ function Roadmap({ onBack }) {
       setError("");
 
       const response = await fetch(
-        "http://127.0.0.1:8000/api/roadmap/generate",
+        "https://productmanagercopilot.onrender.com/api/roadmap/generate",
         {
           method: "POST",
           headers: {

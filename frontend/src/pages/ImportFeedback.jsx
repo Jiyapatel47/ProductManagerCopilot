@@ -71,7 +71,7 @@ function ImportFeedback({ onBack, onContinue }) {
       formData.append("source_type", sourceType);
 
       const response = await fetch(
-        "http://127.0.0.1:8000/api/ingestion/feedback",
+        "https://productmanagercopilot.onrender.com/api/ingestion/feedback",
         {
           method: "POST",
           headers: {

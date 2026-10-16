@@ -2,7 +2,7 @@
 import { useEffect, useState } from "react";
 import "./UserStories.css";
 
-const API_URL = "http://127.0.0.1:8000";
+const API_URL = "https://productmanagercopilot.onrender.com";
 
 function UserStories({ onBack }) {
   const [stories, setStories] = useState([]);
@@ -12,7 +12,20 @@ function UserStories({ onBack }) {
 
   const getToken = () => localStorage.getItem("access_token");
 
-  // Fetch existing user stories
+  // Handle JSON responses safely
+  const getResponseData = async (response) => {
+    const text = await response.text();
+
+    try {
+      return text ? JSON.parse(text) : {};
+    } catch {
+      throw new Error(
+        "Invalid response from backend. Please check the API endpoint."
+      );
+    }
+  };
+
+  // Load existing user stories
   const loadStories = async () => {
     try {
       setLoading(true);
@@ -22,46 +35,43 @@ function UserStories({ onBack }) {
       const token = getToken();
 
       if (!token) {
-        throw new Error("You are not logged in. Please login again.");
+        throw new Error("Please login again. Authentication token not found.");
       }
 
-      const response = await fetch(
-        `${API_URL}/api/user-stories/`,
-        {
-          method: "GET",
-          headers: {
-            Authorization: `Bearer ${token}`,
-            Accept: "application/json",
-          },
-        }
-      );
+      const response = await fetch(`${API_URL}/api/user-stories/`, {
+        method: "GET",
+        headers: {
+          Authorization: `Bearer ${token}`,
+          Accept: "application/json",
+        },
+      });
 
-      const data = await response.json();
+      const data = await getResponseData(response);
 
       if (!response.ok) {
         throw new Error(
-          data.detail || "Failed to load user stories."
+          data.detail || data.message || "Failed to load user stories."
         );
       }
 
-      setStories(
-        Array.isArray(data.user_stories)
-          ? data.user_stories
-          : []
-      );
+      const userStories = Array.isArray(data)
+        ? data
+        : data.user_stories || data.stories || [];
 
+      setStories(Array.isArray(userStories) ? userStories : []);
       setMessage(data.message || "");
     } catch (err) {
       console.error("Load user stories error:", err);
       setError(
-        err.message || "Could not connect to the backend."
+        err.message ||
+          "Could not connect to the backend. Please check the server."
       );
     } finally {
       setLoading(false);
     }
   };
 
-  // Generate new user stories
+  // Generate user stories
   const generateStories = async () => {
     try {
       setLoading(true);
@@ -71,7 +81,7 @@ function UserStories({ onBack }) {
       const token = getToken();
 
       if (!token) {
-        throw new Error("You are not logged in. Please login again.");
+        throw new Error("Please login again. Authentication token not found.");
       }
 
       const response = await fetch(
@@ -85,7 +95,7 @@ function UserStories({ onBack }) {
         }
       );
 
-      const data = await response.json();
+      const data = await getResponseData(response);
 
       if (!response.ok) {
         throw new Error(
@@ -93,26 +103,25 @@ function UserStories({ onBack }) {
         );
       }
 
-      setStories(
-        Array.isArray(data.user_stories)
-          ? data.user_stories
-          : []
-      );
+      const userStories = Array.isArray(data)
+        ? data
+        : data.user_stories || data.stories || [];
 
+      setStories(Array.isArray(userStories) ? userStories : []);
       setMessage(
         data.message || "User stories generated successfully!"
       );
     } catch (err) {
       console.error("Generate user stories error:", err);
       setError(
-        err.message || "Could not connect to the backend."
+        err.message ||
+          "Could not connect to the backend. Please check the server."
       );
     } finally {
       setLoading(false);
     }
   };
 
-  // Load stories when the page opens
   useEffect(() => {
     loadStories();
   }, []);
@@ -120,7 +129,6 @@ function UserStories({ onBack }) {
   return (
     <div className="user-stories-page">
       <div className="user-stories-container">
-
         <button
           type="button"
           className="us-back-button"
@@ -132,12 +140,10 @@ function UserStories({ onBack }) {
         <header className="us-header">
           <div>
             <p className="us-eyebrow">GENERATIVE AI</p>
-
             <h1>User Stories</h1>
-
             <p className="us-description">
-              Generate actionable user stories and acceptance
-              criteria from your product features.
+              Generate actionable user stories and acceptance criteria
+              from your product features.
             </p>
           </div>
 
@@ -147,54 +153,46 @@ function UserStories({ onBack }) {
             onClick={generateStories}
             disabled={loading}
           >
-            {loading ? "Generating..." : "✦ Generate User Stories"}
+            {loading ? "Please wait..." : "✦ Generate User Stories"}
           </button>
         </header>
 
         {error && (
-          <div className="us-error">
-            <strong>Error</strong>
-            <p>{error}</p>
-
-            <button
-              type="button"
-              onClick={loadStories}
-              disabled={loading}
-            >
-              Try Again
-            </button>
+          <div className="us-error" role="alert">
+            <strong>Error:</strong> {error}
           </div>
         )}
 
         {message && !error && (
-          <p className="us-message">{message}</p>
+          <div className="us-success" role="status">
+            {message}
+          </div>
         )}
 
         <section className="us-stories-card">
           <div className="us-section-header">
             <div>
-              <h2>Generated Stories</h2>
-              <p>Your workspace user stories</p>
+              <h2>Generated User Stories</h2>
+              <p>
+                User stories and acceptance criteria for your product.
+              </p>
             </div>
 
             <span className="us-count">
-              {stories.length} Stories
+              {stories.length} {stories.length === 1 ? "Story" : "Stories"}
             </span>
           </div>
 
           {loading && stories.length === 0 ? (
             <div className="us-empty-state">
-              Loading user stories...
+              <p>Loading user stories...</p>
             </div>
           ) : stories.length === 0 ? (
             <div className="us-empty-state">
-              <div className="us-empty-icon">✦</div>
-
               <h3>No user stories yet</h3>
-
               <p>
-                Click Generate User Stories to create stories
-                from your workspace features.
+                Click “Generate User Stories” to create stories from
+                your product features.
               </p>
             </div>
           ) : (
@@ -211,7 +209,7 @@ function UserStories({ onBack }) {
                   <div className="us-story-content">
                     <div className="us-story-title-row">
                       <h3>
-                        {story.title || "Untitled User Story"}
+                        {story.title || `User Story ${index + 1}`}
                       </h3>
 
                       <span className="us-priority">
@@ -227,9 +225,9 @@ function UserStories({ onBack }) {
 
                     <div className="us-story-text">
                       <h4>User Story</h4>
-
                       <p>
                         {story.user_story ||
+                          story.description ||
                           "No user story description available."}
                       </p>
                     </div>
@@ -276,7 +274,6 @@ function UserStories({ onBack }) {
             ↻ Refresh Stories
           </button>
         </div>
-
       </div>
     </div>
   );

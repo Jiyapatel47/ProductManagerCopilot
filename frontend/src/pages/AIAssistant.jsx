@@ -42,7 +42,7 @@ function AIAssistant({ onBack }) {
       }
 
       const response = await fetch(
-        "http://127.0.0.1:8000/api/assistant/chat",
+        "https://productmanagercopilot.onrender.com/api/assistant/chat",
         {
           method: "POST",
           headers: {

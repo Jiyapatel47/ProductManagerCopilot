@@ -1,4 +1,3 @@
-
 import { useEffect, useState } from "react";
 import "./Dashboard.css";
 
@@ -52,7 +51,7 @@ function Dashboard({
 
       const responses = await Promise.all(
         endpoints.map((endpoint) =>
-          fetch(`http://127.0.0.1:8000${endpoint}`, {
+          fetch(`https://productmanagercopilot.onrender.com${endpoint}`, {
             headers,
           })
         )

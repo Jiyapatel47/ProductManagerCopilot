@@ -2,7 +2,7 @@
 import { useEffect, useState } from "react";
 import "./Insights.css";
 
-const API_URL = "http://127.0.0.1:8000";
+const API_URL = "https://productmanagercopilot.onrender.com";
 
 const SOURCE_COLORS = [
   "#7657f6",

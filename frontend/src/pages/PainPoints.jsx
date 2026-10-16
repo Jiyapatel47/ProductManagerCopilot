@@ -18,7 +18,7 @@ function PainPoints({ onBack }) {
       }
 
       const response = await fetch(
-        "http://127.0.0.1:8000/api/insights/pain-points",
+        "https://productmanagercopilot.onrender.com/api/insights/pain-points",
         {
           method: "GET",
           headers: {

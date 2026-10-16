@@ -7,7 +7,7 @@ function ProductStrategy({ onBack }) {
   const [generating, setGenerating] = useState(false);
   const [error, setError] = useState("");
 
-  const API_URL = "http://127.0.0.1:8000";
+  const API_URL = "https://productmanagercopilot.onrender.com";
 
   const getToken = () => {
     return localStorage.getItem("access_token");
