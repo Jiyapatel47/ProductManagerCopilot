@@ -162,6 +162,16 @@ Open the local URL printed by Vite in your terminal.
 - Worked on AI-assisted Product Requirements Document (PRD) and product roadmap generation.
 - Supported the integration of AI capabilities into the product management workflow.
 
+## 🚀 Live Demo
+
+**Live Application:** https://productmanagercopilot-1.onrender.com/
+
+**Backend API:** https://productmanagercopilot.onrender.com/
+
+**API Documentation (Swagger):** https://productmanagercopilot.onrender.com/docs
+
+Try the deployed application to explore AI-powered customer feedback analysis, insights generation, feature prioritization, PRD generation, and product roadmap planning.
+
 
 ## 🎯 Project Objective
 
